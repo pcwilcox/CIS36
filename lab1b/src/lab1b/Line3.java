@@ -40,15 +40,17 @@ public class Line3 {
         Line3 myLine = new Line3();
         // Initialize myLine's x1 and y1 to the point (5, 10),
         // and initialize myLine's x2 and y2 to the point (45, 50).
-      
-        myLine.p1.setLocation(5, 10);
         
-        myLine.p2.setLocation(45, 50);
+        myLine.p1 = new Point(5, 10);
+        myLine.p2 = new Point(45, 50);
+        
         
         // Print the line's slope, which should be 1 (or, 45 degrees).
         System.out.println("Slope: " + myLine.slope());
 
         // check that (10,15) is on the line
+        System.out.print("Checking point (10,15): ");
+        
         if (myLine.pointOnLine(10, 15)) {
             System.out.println(" on the line.");
         } else {
@@ -58,8 +60,8 @@ public class Line3 {
         // check that the angle between this line and another line
         //  defined by (5,10) and (10,20) is about 1/3
         Line3 otherLine = new Line3();
-        otherLine.p1.setLocation(5, 10);
-        otherLine.p1.setLocation(10, 20);
+        otherLine.p1 = new Point(5, 10);
+        otherLine.p2 = new Point(10, 20);
 
         System.out.println("Checking angle to other line: " + myLine.angleTo(otherLine));
     }
