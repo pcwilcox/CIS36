@@ -1,0 +1,5 @@
+Lab 1-2:
+1. 6 types: file, inputstream, path to a file, readable, readablebytechannel, string.
+2. IOException()
+3. err (static PrintStream), in (static InputStream), out (static PrintStream)
+4. PrintWriter
