@@ -229,3 +229,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/lab1/JavaApplication4/dist/
+/lab1a/JavaApplication4/dist/
+/lab1a/JavaApplication4/nbproject/private/
