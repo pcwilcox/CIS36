@@ -11,6 +11,26 @@ public class Name {
         this.secondName = secondName;
         this.gender = gender;
     }
+    
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    public void setLastName(String lastName) {
+        this.secondName = lastName;
+    }
+    
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+    
+    public String getFirstName() {
+        return this.firstName;
+    }
+    
+    public String getLastName() {
+        return this.secondName;
+    }
 
     public String name() {
         String firstChar = this.firstName.substring(0, 1);
