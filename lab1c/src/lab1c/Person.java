@@ -11,22 +11,24 @@ public class Person {
     private int height;
     private int personID;
 
-    public void setHairColor(String hairColor) {
-        this.hairColor = hairColor;
-    }
-
     public void setName(String firstName) {
         this.personName.setName(firstName);
     }
 
-    private static int setRandomHeight() {
-        Random randomHeight = new Random();
-        int returnHeight = 51 + randomHeight.nextInt(39);
-        return returnHeight;
+    public String getName() {
+        return this.personName.name();
+    }
+
+    public String getInitials() {
+        return this.personName.initials();
     }
 
     public int getPersonID() {
         return this.personID;
+    }
+
+    public void setHairColor(String hairColor) {
+        this.hairColor = hairColor;
     }
 
     public String getHairColor() {
@@ -47,7 +49,11 @@ public class Person {
         }
     }
 
-    public String getHeight() {
+    public int getHeight() {
+        return height;
+    }
+
+    public String getHeightString() {
         int feet = (height / 12);
         int inches = (height % 12);
 
@@ -56,8 +62,15 @@ public class Person {
         return heightString;
     }
 
-    public void setHair(String hair) {
-        this.hairColor = hair;
+    private static int setRandomHeight() {
+        Random randomHeight = new Random();
+        int returnHeight = 51 + randomHeight.nextInt(39);
+        return returnHeight;
+    }
+
+    public Person copyPerson() {
+        Person newPerson = new Person(this.personName.getFirstName(), this.personName.getLastName(), this.personName.gender(), this.hairColor, this.height);
+        return newPerson;
     }
 
     Person(String firstName, String lastName, int gender, String hairColor, int height) {
