@@ -3,36 +3,49 @@ package lab1c;
 public class Name {
 
     String firstName,
-            secondName;
+            lastName;
     int gender;
 
-    public void setName(String firstName, String secondName, int gender) {
+    public void setName(String firstName, String lastName, int gender) {
         this.firstName = firstName;
-        this.secondName = secondName;
+        this.lastName = lastName;
         this.gender = gender;
     }
-
+    
+    public void setName(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    
+    public void setName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
     public String name() {
         String firstChar = this.firstName.substring(0, 1);
-        String secondChar = this.secondName.substring(0, 1);
+        String secondChar = this.lastName.substring(0, 1);
         String firstRemaining = this.firstName.substring(1, this.firstName.length());
-        String secondRemaining = this.secondName.substring(1, this.secondName.length());
+        String secondRemaining = this.lastName.substring(1, this.lastName.length());
         String returnName = firstChar.toUpperCase() + firstRemaining.toLowerCase() + " " + secondChar.toUpperCase() + secondRemaining.toLowerCase();
         return returnName;
     }
 
     public String rollCallName() {
         String firstChar = this.firstName.substring(0, 1);
-        String secondChar = this.secondName.substring(0, 1);
+        String secondChar = this.lastName.substring(0, 1);
         String firstRemaining = this.firstName.substring(1, this.firstName.length());
-        String secondRemaining = this.secondName.substring(1, this.secondName.length());
+        String secondRemaining = this.lastName.substring(1, this.lastName.length());
         String returnName = secondChar.toUpperCase() + secondRemaining.toLowerCase() + ", " + firstChar.toUpperCase() + firstRemaining.toLowerCase();
         return returnName;
     }
 
     public String initials() {
         String firstChar = this.firstName.substring(0, 1);
-        String secondChar = this.secondName.substring(0, 1);
+        String secondChar = this.lastName.substring(0, 1);
         String returnInitials = firstChar.toUpperCase() + secondChar.toUpperCase();
         return returnInitials;
     }
@@ -64,7 +77,7 @@ public class Name {
     
     public String pigLatinName() {
         String pigFirst = pigName(this.firstName);
-        String pigSecond = pigName(this.secondName);
+        String pigSecond = pigName(this.lastName);
         
         String returnName = pigFirst + " " + pigSecond;
         
@@ -100,17 +113,17 @@ public class Name {
         this("John", "Doe", -99);
     }
 
-    public Name(String secondName) {
-        this("John", secondName, -99);
+    public Name(String lastName) {
+        this("John", lastName, -99);
     }
 
-    public Name(String firstName, String secondName) {
-        this(firstName, secondName, -99);
+    public Name(String firstName, String lastName) {
+        this(firstName, lastName, -99);
     }
 
-    public Name(String firstName, String secondName, int gender) {
+    public Name(String firstName, String lastName, int gender) {
         this.firstName = firstName;
-        this.secondName = secondName;
+        this.lastName = lastName;
         this.gender = gender;
     }
 
