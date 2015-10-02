@@ -5,11 +5,20 @@ import java.util.Random;
 public class Person {
 
     private static int assignedIDs;
-    private int thisID;
     private Name personName;
     private String hairColor;
     private int height;
     private int personID;
+
+    public String rollCallName() {
+        String returnName = this.personName.rollCallName();
+        return returnName;
+    }
+
+    public String pigLatinName() {
+        String returnName = this.personName.pigLatinName();
+        return returnName;
+    }
 
     public void setName(String firstName) {
         this.personName.setName(firstName);
@@ -32,7 +41,7 @@ public class Person {
     }
 
     public String getHairColor() {
-        if (this.hairColor != null) {
+        if (this.hairColor == null) {
             return "hair color is unspecified.";
         } else {
             return this.hairColor;
@@ -62,6 +71,17 @@ public class Person {
         return heightString;
     }
 
+    public int getGender() {
+        return this.personName.gender();
+    }
+    
+    public void setGender(int gender) {
+        if (gender == 1 || gender == 2) {
+            this.personName.setGender(gender);
+        } else {
+            this.personName.setGender(-99);
+        }
+    }
     private static int setRandomHeight() {
         Random randomHeight = new Random();
         int returnHeight = 51 + randomHeight.nextInt(39);
@@ -81,6 +101,10 @@ public class Person {
         this.personID = assignedIDs;
     }
 
+    Person(String firstName, String lastName, String hairColor) {
+        this(firstName, lastName, -99, hairColor, setRandomHeight());
+    }
+    
     Person(String firstName, String lastName, int gender, int height) {
         this(firstName, lastName, gender, null, height);
     }
