@@ -15,6 +15,7 @@ public class PersonTester {
         Person jonny = new Person("Jonny", "Tremaine", "brown");
         System.out.println("My name is " + jonny.getName() + " and my initials are " + jonny.getInitials() + ".");
         System.out.println("My ID is " + jonny.getPersonID() + " and my hair is " + jonny.getHairColor() + ".");
+        System.out.println("In pig latin, my name is " + jonny.pigLatinName());
     }
     
     static void copyTest(Person personToCopy) {
@@ -56,25 +57,3 @@ public class PersonTester {
         System.out.println("I am " + johnson.getHeightString() + " tall.");
     }
 }
-
-/*
-Name johnson = new Name("Johnson");
-        
-        
-        
-        
-        
-        
-        
-        Name jessica = new Name("Jessica", "Simpson", 2);
-        
-        System.out.println("My name is " + jessica.name() + " and I like pig latin, so call me " + jessica.pigLatinName() + ".");
-        
-        Name steven = new Name("Steven", "Tyler", 2);
-        
-        System.out.println("My name is " + steven.name() + " and I like pig latin, so call me " + steven.pigLatinName() + ".");
-        
-        Name ermey = new Name("R Lee", "Ermey", 1);
-        
-        System.out.println(ermey.rollCallName() + " reporting!");
-*/
