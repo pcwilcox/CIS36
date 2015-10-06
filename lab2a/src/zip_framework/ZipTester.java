@@ -62,7 +62,7 @@ public class ZipTester {
 
     public static void testZip(ArrayList<Integer> a1, ArrayList<Integer> a2, ArrayList<Integer> correctAnswer) {
         ArrayList<Integer> answer = Zip.zip(a1, a2);
-        if (a1.equals(a2)) {
+        if (answer.equals(correctAnswer)) {
             // got it right
             System.out.println("CORRECT: zip " + a1 + " + " + a2);
         } else {
