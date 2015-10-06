@@ -1,11 +1,60 @@
 package lab2a;
 
+import java.util.ArrayList;
+
 public class Zip {
 
     public static void main(String[] args) {
 
         zipperIntTester();
         zipperListTester();
+    }
+
+    public static void zipperListTester() {
+        System.out.println("Testing with null (ListTest1):");
+        zipperListTest1(); //null
+        System.out.println("Testing with right null (ListTest2):");
+        zipperListTest2(); // [1, 2, 3, 4, 5, 6], [null]
+        System.out.println("Testing with two arrays (ListTest3):");
+        zipperListTest3(); // [1, 2, 3] [4, 5, 6]
+        System.out.println("Testing with left null (ListTest4):");
+        zipperListTest4(); // [null], [1, 2, 3, 4, 5, 6]
+    }
+
+    public static void zipperListTest1() {
+        ArrayList<Integer> zipped = zipperList(null, null);
+        System.out.println(zipped.toString());
+    }
+
+    public static void zipperListTest2() {
+        ArrayList<Integer> left = new ArrayList();
+        for (int i = 0; i < 6; i++) {
+            left.add(i + 1);
+        }
+        ArrayList<Integer> zipped = zipperList(left, null);
+        System.out.println(zipped.toString());
+    }
+
+    public static void zipperListTest4() {
+        ArrayList<Integer> right = new ArrayList();
+        for (int i = 0; i < 6; i++) {
+            right.add(i + 1);
+        }
+        ArrayList<Integer> zipped = zipperList(null, right);
+        System.out.println(zipped.toString());
+    }
+
+    public static void zipperListTest3() {
+        ArrayList<Integer> left = new ArrayList();
+        ArrayList<Integer> right = new ArrayList();
+        
+        for (int i = 0; i < 12; i += 2) {
+            left.add(i);
+            right.add(i + 1);
+        }
+        
+        ArrayList<Integer> zipped = zipperList(left, right);
+        System.out.println(zipped.toString());
     }
 
     public static void zipperIntTester() {
@@ -117,10 +166,10 @@ public class Zip {
         }
         return zipped;
     }
-    
-        public static int[] zipperList(ArrayList<Integer> left, ArrayList<Integer> right) {
+
+    public static ArrayList<Integer> zipperList(ArrayList<Integer> left, ArrayList<Integer> right) {
         if (left == null && right == null) {
-            int[] zipped = new int[0];
+            ArrayList<Integer> zipped = new ArrayList<>(0);
             return zipped;
         } else if (left == null) {
             return right;
@@ -128,28 +177,28 @@ public class Zip {
             return left;
         }
 
-        int[] zipped = new int[left.length + right.length];
+        ArrayList<Integer> zipped = new ArrayList<>();
 
         int j = 0, k = 0;
 
-        for (int i = 0; i < zipped.length; i++) {
+        for (int i = 0; i < (left.size() + right.size()); i++) {
             if (i % 2 == 0) {
                 // grab from left
-                if (j < left.length) {
-                    zipped[i] = left[j];
+                if (j < left.size()) {
+                    zipped.add(left.get(j));
                     j++;
                 } else {
-                    zipped[i] = right[k];
+                    zipped.add(right.get(k));
                     k++;
                 }
 
             } else {
                 // grab from right
-                if (k < right.length) {
-                    zipped[i] = right[k];
+                if (k < right.size()) {
+                    zipped.add(right.get(k));
                     k++;
                 } else {
-                    zipped[i] = left[j];
+                    zipped.add(left.get(j));
                     j++;
                 }
             }
