@@ -179,30 +179,52 @@ public class Zip {
 
         ArrayList<Integer> zipped = new ArrayList<>();
 
-        int j = 0, k = 0;
-
-        for (int i = 0; i < (left.size() + right.size()); i++) {
-            if (i % 2 == 0) {
-                // grab from left
-                if (j < left.size()) {
-                    zipped.add(left.get(j));
-                    j++;
-                } else {
-                    zipped.add(right.get(k));
-                    k++;
-                }
-
+        while (left.size() + right.size() > 0) {
+            if (left.size() > 0) {
+                zipped.add(left.get(0));
+                left.remove(0);
             } else {
-                // grab from right
-                if (k < right.size()) {
-                    zipped.add(right.get(k));
-                    k++;
-                } else {
-                    zipped.add(left.get(j));
-                    j++;
+                for (Integer i : right) {
+                    zipped.add(i);
+                    right.remove(i);
+                }
+            }
+            
+            if (right.size() > 0) {
+                zipped.add(right.get(0));
+                right.remove(0);
+            } else {
+                for (Integer i : left) {
+                    zipped.add(i);
+                    left.remove(i);
                 }
             }
         }
+        
+//        int j = 0, k = 0;
+//
+//        for (int i = 0; i < (left.size() + right.size()); i++) {
+//            if (i % 2 == 0) {
+//                // grab from left
+//                if (j < left.size()) {
+//                    zipped.add(left.get(j));
+//                    j++;
+//                } else {
+//                    zipped.add(right.get(k));
+//                    k++;
+//                }
+//
+//            } else {
+//                // grab from right
+//                if (k < right.size()) {
+//                    zipped.add(right.get(k));
+//                    k++;
+//                } else {
+//                    zipped.add(left.get(j));
+//                    j++;
+//                }
+//            }
+//        }
         return zipped;
     }
 
