@@ -27,7 +27,7 @@ public class Zip {
     }
 
     public static void zipperListTest2() {
-        ArrayList<Integer> left = new ArrayList();
+        ArrayList<Integer> left = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             left.add(i + 1);
         }
@@ -36,7 +36,7 @@ public class Zip {
     }
 
     public static void zipperListTest4() {
-        ArrayList<Integer> right = new ArrayList();
+        ArrayList<Integer> right = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             right.add(i + 1);
         }
@@ -45,8 +45,8 @@ public class Zip {
     }
 
     public static void zipperListTest3() {
-        ArrayList<Integer> left = new ArrayList();
-        ArrayList<Integer> right = new ArrayList();
+        ArrayList<Integer> left = new ArrayList<>();
+        ArrayList<Integer> right = new ArrayList<>();
         
         for (int i = 0; i < 12; i += 2) {
             left.add(i);
@@ -184,47 +184,16 @@ public class Zip {
                 zipped.add(left.get(0));
                 left.remove(0);
             } else {
-                for (Integer i : right) {
-                    zipped.add(i);
-                    right.remove(i);
-                }
+                zipped.addAll(right);
             }
             
             if (right.size() > 0) {
                 zipped.add(right.get(0));
                 right.remove(0);
             } else {
-                for (Integer i : left) {
-                    zipped.add(i);
-                    left.remove(i);
-                }
+                zipped.addAll(left);
             }
         }
-        
-//        int j = 0, k = 0;
-//
-//        for (int i = 0; i < (left.size() + right.size()); i++) {
-//            if (i % 2 == 0) {
-//                // grab from left
-//                if (j < left.size()) {
-//                    zipped.add(left.get(j));
-//                    j++;
-//                } else {
-//                    zipped.add(right.get(k));
-//                    k++;
-//                }
-//
-//            } else {
-//                // grab from right
-//                if (k < right.size()) {
-//                    zipped.add(right.get(k));
-//                    k++;
-//                } else {
-//                    zipped.add(left.get(j));
-//                    j++;
-//                }
-//            }
-//        }
         return zipped;
     }
 
