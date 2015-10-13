@@ -1,13 +1,14 @@
 package lab2a;
 
-import java.awt.Point;
+import java.awt.*;
 
 public class Line {
 
     private Point p1;
     private Point p2;
-    private boolean flip;
+    private boolean toBeFlipped;
 
+    
     public boolean pointOnLine(Point p) {
 
         return (pointMatch(p));
@@ -22,13 +23,19 @@ public class Line {
             return false;
         }
     }
+
     
-    public void setFlip() {
-        flip = true;
+    public void setFlip(Boolean flip) {
+        toBeFlipped = flip;
     }
-    
+
     public boolean getFlip() {
-        return flip;
+        return toBeFlipped;
+    }
+
+    public void draw(Graphics g) {
+        g.setColor(Color.black);
+        g.drawLine(p1.x, p1.y, p2.x, p2.y);
     }
 
     Line(Point start, Point end) {
@@ -37,6 +44,6 @@ public class Line {
 
         p2.x = end.x;
         p2.y = end.y;
-        flip = false;
+        toBeFlipped = false;
     }
 }

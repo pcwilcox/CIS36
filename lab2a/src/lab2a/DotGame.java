@@ -3,6 +3,8 @@ package lab2a;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 // This program accepts clicks and draws them connected by lines.
 // We'll talk about the "extends" keyword soon.
@@ -37,9 +39,45 @@ public class DotGame extends MouseListenerDrawer {
         }
 
     }
-    
+
+    private void showLines(Graphics g) {
+        for (Line line : linesShown) {
+            line.draw(g);
+        }
+    }
+
     private void lineFlip(Point p) {
+        // draw linesShown
+
+        for (Line line : linesShown) {
+            if (line.pointOnLine(p) == true) {
+                line.setFlip(true);
+            }
+        }
+
+        for (Line line : linesHidden) {
+            if (line.pointOnLine(p) == true) {
+                line.setFlip(true);
+            }
+        }
+
+        for (int i = 0; i < linesShown.size(); i++) {
+            if (linesShown.get(i).getFlip() == true) {
+                linesHidden.add(linesShown.get(i));
+                linesHidden.get(linesHidden.size() - 1).setFlip(false);
+            }
+        }
+
+        for (int i = 0; i < linesHidden.size(); i++) {
+            if (linesHidden.get(i).getFlip() == true) {
+                linesShown.add(linesHidden.get(i));
+                linesShown.get(linesShown.size() - 1).setFlip(false);
+            }
+        }
         
+        
+        
+
     }
 
     // This gets called whenever Java needs to draw to the window.  
@@ -51,18 +89,18 @@ public class DotGame extends MouseListenerDrawer {
         if (closed == false && points.size() > 1) {
             int thisPoint = points.size() - 1;
             int lastPoint = points.size() - 2;
-            
+
             Line newLine = new Line(points.get(lastPoint), points.get(thisPoint));
             linesShown.add(newLine);
         }
-        // draw everything
+
         int lastIndex = points.size() - 1;
         for (int i = 0; i < points.size(); i++) {
             Point p = points.get(i);
             drawPoint(g, p, Color.red);
             if (i != lastIndex) {
                 drawLine(g, p, points.get(i + 1));
-                
+
             }
 
             if (closed == true && i == lastIndex) {
