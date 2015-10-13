@@ -11,6 +11,8 @@ public class DotGame extends MouseListenerDrawer {
     private final int DOT_RADIUS = 5;  // make this bigger if it comes out tiny on your screen
     private ArrayList<Point> points;
     private boolean closed = false;
+    private ArrayList<Line> linesShown;
+    private ArrayList<Line> linesHidden;
 
     public DotGame() {
         points = new ArrayList<>();
@@ -21,7 +23,11 @@ public class DotGame extends MouseListenerDrawer {
         // where did the user click?
         Point p_clicked = new Point(event.getX(), event.getY());
 
-        if ((closed = false) && (closeTo(p_clicked, points.get(0)) == true)) {
+        if (closed == true) {
+            lineFlip(p_clicked);
+        }
+
+        if ((points.size() > 0) && (closeTo(p_clicked, points.get(0)) == true)) {
             closed = true;
             repaint();
         } else if (closed == false) {
@@ -31,6 +37,10 @@ public class DotGame extends MouseListenerDrawer {
         }
 
     }
+    
+    private void lineFlip(Point p) {
+        
+    }
 
     // This gets called whenever Java needs to draw to the window.  
     //   Basic method: first erase the window, then redraw it.  Simple!
@@ -38,6 +48,13 @@ public class DotGame extends MouseListenerDrawer {
         // erase the window
         erase(g);
 
+        if (closed == false && points.size() > 1) {
+            int thisPoint = points.size() - 1;
+            int lastPoint = points.size() - 2;
+            
+            Line newLine = new Line(points.get(lastPoint), points.get(thisPoint));
+            linesShown.add(newLine);
+        }
         // draw everything
         int lastIndex = points.size() - 1;
         for (int i = 0; i < points.size(); i++) {
@@ -45,6 +62,11 @@ public class DotGame extends MouseListenerDrawer {
             drawPoint(g, p, Color.red);
             if (i != lastIndex) {
                 drawLine(g, p, points.get(i + 1));
+                
+            }
+
+            if (closed == true && i == lastIndex) {
+                drawLine(g, p, points.get(0));
             }
         }
     }
