@@ -3,8 +3,6 @@ package lab2a;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 // This program accepts clicks and draws them connected by lines.
 // We'll talk about the "extends" keyword soon.
@@ -27,6 +25,7 @@ public class DotGame extends MouseListenerDrawer {
 
         if (closed == true) {
             lineFlip(p_clicked);
+            showLines(g);
         }
 
         if ((points.size() > 0) && (closeTo(p_clicked, points.get(0)) == true)) {
@@ -74,10 +73,26 @@ public class DotGame extends MouseListenerDrawer {
                 linesShown.get(linesShown.size() - 1).setFlip(false);
             }
         }
-        
-        
-        
 
+        int i = 0;
+        while (i < linesShown.size()) {
+            if (linesShown.get(i).getFlip() == true) {
+                linesShown.remove(i);
+            } else {
+                i++;
+            }
+
+        }
+
+        i = 0;
+        while (i < linesHidden.size()) {
+            if (linesHidden.get(i).getFlip() == true) {
+                linesHidden.remove(i);
+            } else {
+                i++;
+            }
+
+        }
     }
 
     // This gets called whenever Java needs to draw to the window.  
