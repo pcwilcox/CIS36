@@ -8,8 +8,9 @@ import java.util.ArrayList;
 // We'll talk about the "extends" keyword soon.
 public class ClosedPattern extends MouseListenerDrawer {
 
-    private final int DOT_RADIUS = 5;  // make this bigger if it comes out tiny on your screen
+    private final int DOT_RADIUS = 20;  // make this bigger if it comes out tiny on your screen
     private ArrayList<Point> points;
+    private boolean closed = false;
 
     public ClosedPattern() {
         points = new ArrayList<>();
@@ -19,16 +20,15 @@ public class ClosedPattern extends MouseListenerDrawer {
     public void mousePressed(MouseEvent event) {
         // where did the user click?
         Point p_clicked = new Point(event.getX(), event.getY());
-        if (closeTo(p_clicked, points.get(0))) {
-            // close the thing
-            repaint();
-            return;
-        } else {
-            points.add(p_clicked);
-        }
 
-        // always redraw the screen
-        repaint();
+        if ((points.size() > 0) && (closeTo(p_clicked, points.get(0)) == true)) {
+            closed = true;
+            repaint();
+        } else if (closed == false) {
+            points.add(p_clicked);
+            // always redraw the screen
+            repaint();
+        }
     }
 
     // This gets called whenever Java needs to draw to the window.  
@@ -44,8 +44,25 @@ public class ClosedPattern extends MouseListenerDrawer {
             drawPoint(g, p, Color.red);
             if (i != lastIndex) {
                 drawLine(g, p, points.get(i + 1));
-            } else {
+            }
+
+            if (closed == true && i == lastIndex) {
                 drawLine(g, p, points.get(0));
+            }
+        }
+
+        if (closed == true) {
+            for (int i = 0; i < points.size(); i++) {
+                Point p1 = points.get(i);
+
+                for (int j = points.size() - 1; j > i + 2; j--) {
+                    Point p2 = points.get(j);
+                    if (i == 0 && j == points.size() - 1) {
+                        continue;
+                    }
+                    drawLine(g, p1, p2, Color.red);
+
+                }
             }
         }
     }
