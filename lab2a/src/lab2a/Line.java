@@ -24,6 +24,13 @@ public class Line {
         }
     }
 
+    public Point getStart() {
+        return p1;
+    }
+    
+    public Point getEnd() {
+        return p2;
+    }
     
     public void setFlip(Boolean flip) {
         toBeFlipped = flip;

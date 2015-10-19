@@ -16,33 +16,33 @@ public class DotGame extends MouseListenerDrawer {
 
     public DotGame() {
         points = new ArrayList<>();
+        linesShown = new ArrayList<>();
+        linesHidden = new ArrayList<>();
     }
 
     // This gets called whenever the user presses their mouse button in the window
+    @Override
     public void mousePressed(MouseEvent event) {
         // where did the user click?
         Point p_clicked = new Point(event.getX(), event.getY());
 
         if (closed == true) {
-            lineFlip(p_clicked);
-            showLines(g);
-        }
+            for (Point posPoint : points) {
+                if (closeTo(p_clicked, posPoint) == true) {
+                    lineFlip(p_clicked);
+                }
 
-        if ((points.size() > 0) && (closeTo(p_clicked, points.get(0)) == true)) {
+            }
+            repaint();
+        } else if ((points.size() > 0) && (closeTo(p_clicked, points.get(0)) == true)) {
             closed = true;
             repaint();
-        } else if (closed == false) {
+        } else {
             points.add(p_clicked);
             // always redraw the screen
             repaint();
         }
 
-    }
-
-    private void showLines(Graphics g) {
-        for (Line line : linesShown) {
-            line.draw(g);
-        }
     }
 
     private void lineFlip(Point p) {
@@ -97,30 +97,33 @@ public class DotGame extends MouseListenerDrawer {
 
     // This gets called whenever Java needs to draw to the window.  
     //   Basic method: first erase the window, then redraw it.  Simple!
+    @Override
     public void paintComponent(Graphics g) {
         // erase the window
         erase(g);
 
+        // draw points
+        for (Point p : points) {
+            drawPoint(g, p, Color.red);
+        }
+
+        // add lines until the system is closed
         if (closed == false && points.size() > 1) {
             int thisPoint = points.size() - 1;
             int lastPoint = points.size() - 2;
 
             Line newLine = new Line(points.get(lastPoint), points.get(thisPoint));
             linesShown.add(newLine);
+
+            for (int i = 0; i < points.size() - 2; i++) {
+                Line otherLine = new Line(points.get(i), points.get(thisPoint));
+                linesHidden.add(otherLine);
+            }
         }
 
-        int lastIndex = points.size() - 1;
-        for (int i = 0; i < points.size(); i++) {
-            Point p = points.get(i);
-            drawPoint(g, p, Color.red);
-            if (i != lastIndex) {
-                drawLine(g, p, points.get(i + 1));
-
-            }
-
-            if (closed == true && i == lastIndex) {
-                drawLine(g, p, points.get(0));
-            }
+        // draw visible lines
+        for (Line showLine : linesShown) {
+            drawLine(g, showLine.getStart(), showLine.getEnd(), Color.black);
         }
     }
 
