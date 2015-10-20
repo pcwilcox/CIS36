@@ -11,6 +11,7 @@ public class DotGame extends MouseListenerDrawer {
     private final int DOT_RADIUS = 5;  // make this bigger if it comes out tiny on your screen
     private ArrayList<Point> points;
     private boolean closed = false;
+    private boolean won = false;
     private ArrayList<Line> linesShown;
     private ArrayList<Line> linesHidden;
 
@@ -37,6 +38,18 @@ public class DotGame extends MouseListenerDrawer {
             lineFlip(p_clicked);
             repaint();
         } else if ((points.size() > 0) && (closeTo(p_clicked, points.get(0)) == true)) {
+            int lastPoint = points.size() - 1;
+            Point lineStart = points.get(lastPoint);
+            Point lineEnd = points.get(0);
+
+            Line newLine = new Line(lineStart, lineEnd);
+            linesShown.add(newLine);
+            for (int i = 0; i < linesHidden.size(); i++) {
+                Line otherLine = linesHidden.get(i);
+                if (newLine.equals(otherLine) == true) {
+                    linesHidden.remove(i);
+                }
+            }
             closed = true;
             repaint();
         } else {
@@ -80,6 +93,10 @@ public class DotGame extends MouseListenerDrawer {
             }
         }
 
+        if (linesShown.isEmpty() == true) {
+            won = true;
+        }
+
     }
 
     // This gets called whenever Java needs to draw to the window.  
@@ -91,7 +108,11 @@ public class DotGame extends MouseListenerDrawer {
 
         // draw points
         for (Point p : points) {
-            drawPoint(g, p, Color.red);
+            if (won == true) {
+                drawPoint(g, p, Color.yellow);
+            } else {
+                drawPoint(g, p, Color.red);
+            }
         }
 
         // add lines until the system is closed
@@ -111,24 +132,10 @@ public class DotGame extends MouseListenerDrawer {
             }
         }
 
-        if (closed == true) {
-            int lastPoint = points.size() - 1;
-            Point lineStart = points.get(lastPoint);
-            Point lineEnd = points.get(0);
-
-            Line newLine = new Line(lineStart, lineEnd);
-            linesShown.add(newLine);
-            for (int i = 0; i < linesHidden.size(); i++) {
-                if (newLine.equals(linesHidden.get(i)) == true) {
-                    linesHidden.remove(i);
-                }
-            }
-        }
-
         // draw visible lines
         for (Line showLine : linesShown) {
 
-                drawLine(g, showLine.getStart(), showLine.getEnd(), Color.black);
+            drawLine(g, showLine.getStart(), showLine.getEnd(), Color.black);
         }
     }
 
