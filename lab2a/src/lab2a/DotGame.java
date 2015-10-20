@@ -27,12 +27,14 @@ public class DotGame extends MouseListenerDrawer {
         Point p_clicked = new Point(event.getX(), event.getY());
 
         if (closed == true) {
+
             for (Point posPoint : points) {
                 if (closeTo(p_clicked, posPoint) == true) {
-                    lineFlip(p_clicked);
+                    p_clicked = posPoint;
                 }
 
             }
+            lineFlip(p_clicked);
             repaint();
         } else if ((points.size() > 0) && (closeTo(p_clicked, points.get(0)) == true)) {
             closed = true;
@@ -64,6 +66,8 @@ public class DotGame extends MouseListenerDrawer {
             if (linesShown.get(i).getFlip() == true) {
                 linesHidden.add(linesShown.get(i));
                 linesHidden.get(linesHidden.size() - 1).setFlip(false);
+                linesShown.remove(i);
+                i--;
             }
         }
 
@@ -71,28 +75,11 @@ public class DotGame extends MouseListenerDrawer {
             if (linesHidden.get(i).getFlip() == true) {
                 linesShown.add(linesHidden.get(i));
                 linesShown.get(linesShown.size() - 1).setFlip(false);
-            }
-        }
-
-        int i = 0;
-        while (i < linesShown.size()) {
-            if (linesShown.get(i).getFlip() == true) {
-                linesShown.remove(i);
-            } else {
-                i++;
-            }
-
-        }
-
-        i = 0;
-        while (i < linesHidden.size()) {
-            if (linesHidden.get(i).getFlip() == true) {
                 linesHidden.remove(i);
-            } else {
-                i++;
+                i--;
             }
-
         }
+
     }
 
     // This gets called whenever Java needs to draw to the window.  
@@ -111,8 +98,11 @@ public class DotGame extends MouseListenerDrawer {
         if (closed == false && points.size() > 1) {
             int thisPoint = points.size() - 1;
             int lastPoint = points.size() - 2;
+            Point lineStart = points.get(lastPoint);
 
-            Line newLine = new Line(points.get(lastPoint), points.get(thisPoint));
+            Point lineEnd = points.get(thisPoint);
+
+            Line newLine = new Line(lineStart, lineEnd);
             linesShown.add(newLine);
 
             for (int i = 0; i < points.size() - 2; i++) {
@@ -121,9 +111,24 @@ public class DotGame extends MouseListenerDrawer {
             }
         }
 
+        if (closed == true) {
+            int lastPoint = points.size() - 1;
+            Point lineStart = points.get(lastPoint);
+            Point lineEnd = points.get(0);
+
+            Line newLine = new Line(lineStart, lineEnd);
+            linesShown.add(newLine);
+            for (int i = 0; i < linesHidden.size(); i++) {
+                if (newLine.equals(linesHidden.get(i)) == true) {
+                    linesHidden.remove(i);
+                }
+            }
+        }
+
         // draw visible lines
         for (Line showLine : linesShown) {
-            drawLine(g, showLine.getStart(), showLine.getEnd(), Color.black);
+
+                drawLine(g, showLine.getStart(), showLine.getEnd(), Color.black);
         }
     }
 

@@ -8,7 +8,6 @@ public class Line {
     private Point p2;
     private boolean toBeFlipped;
 
-    
     public boolean pointOnLine(Point p) {
 
         return (pointMatch(p));
@@ -27,11 +26,11 @@ public class Line {
     public Point getStart() {
         return p1;
     }
-    
+
     public Point getEnd() {
         return p2;
     }
-    
+
     public void setFlip(Boolean flip) {
         toBeFlipped = flip;
     }
@@ -45,7 +44,14 @@ public class Line {
         g.drawLine(p1.x, p1.y, p2.x, p2.y);
     }
 
+    public boolean equals(Line otherLine) {
+        return (otherLine.pointOnLine(p1) && otherLine.pointOnLine(p2));
+    }
+
     Line(Point start, Point end) {
+        p1 = new Point();
+        p2 = new Point();
+
         p1.x = start.x;
         p1.y = start.y;
 
