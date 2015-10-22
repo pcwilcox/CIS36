@@ -15,7 +15,7 @@ public class AlienPack {
         aliens.add(newAlien);
     }
 
-    public ArrayList getAliens() {
+    public ArrayList<Alien> getAliens() {
         return aliens;
     }
 
@@ -29,5 +29,15 @@ public class AlienPack {
         }
         
         return damage;
+    }
+    
+    public int calculateHealth() {
+        int health = 0;
+        
+        for (Alien alien : aliens) {
+            health += alien.getHealth();
+        }
+        
+        return health;
     }
 }
