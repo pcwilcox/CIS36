@@ -29,4 +29,8 @@ public class Cooperator extends Player {
         return true;
     }
 
+    @Override
+    public void opponentChoice(boolean opponentCooperated) {
+        
+    }
 }

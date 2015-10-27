@@ -28,5 +28,8 @@ public class Competitor extends Player {
     public boolean cooperate() {
         return false;
     }
-
+@Override
+    public void opponentChoice(boolean opponentCooperated) {
+        
+    }
 }

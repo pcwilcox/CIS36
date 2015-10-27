@@ -39,5 +39,10 @@ public class RandomChooser extends Player {
             return false;
         }
     }
+    
+    @Override
+    public void opponentChoice(boolean opponentCooperated) {
+        
+    }
 
 }

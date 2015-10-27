@@ -32,7 +32,7 @@ public abstract class Player {
 
         // called by the simulation framework after each turn is completed
     // parameter reflects oppenents choice in that turn.
-    public void opponentChoice(boolean opponentCooperated) {
-        // default implementation does nothing with this information
-    }
+    public abstract void opponentChoice(boolean opponentCooperated);
+    // default implementation does nothing with this information
+    
 }
