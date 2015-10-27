@@ -4,6 +4,8 @@ public class Line extends OneDimensionalShape {
 
     private Point start;
     private Point end;
+    
+    
 
     Line() {
         this.shapeID = nextShape();
