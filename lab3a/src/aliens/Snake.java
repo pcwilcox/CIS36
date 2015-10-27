@@ -5,7 +5,7 @@ public class Snake extends Alien {
     
     @Override
     public int getDamage() {
-        return super.getDamage();
+        return 10;
     }
     
     @Override

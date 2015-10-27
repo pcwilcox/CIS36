@@ -1,14 +1,12 @@
 package aliens;
 
-public class Alien {
+public abstract class Alien {
 
     private int health;
     private String name;
     private int damage;
 
-    public int getDamage() {
-        return damage;
-    }
+    public abstract int getDamage();
 
     public void setDamage(int damage) {
         this.damage = damage;

@@ -4,7 +4,7 @@ public class Ogre extends Alien {
 
     @Override
     public int getDamage() {
-        return super.getDamage();
+        return 6;
     }
 
     @Override

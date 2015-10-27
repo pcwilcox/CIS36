@@ -1,9 +1,10 @@
 package aliens;
 
 public class MarshmellowMan extends Alien {
-        @Override
+        
+    @Override
     public int getDamage() {
-        return super.getDamage();
+        return 1;
     }
     
     @Override
