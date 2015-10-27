@@ -22,6 +22,12 @@ public class Line extends OneDimensionalShape {
         this.start.move(x, y, z);
         this.end.move(x, y, z);
     }
+    
+    @Override
+    public String toString() {
+        String details = "Start: " + this.start + ", End: " + this.end + ", Length: " + this.getLength();
+        return details;
+    }
 
     @Override
     public double getLength() {

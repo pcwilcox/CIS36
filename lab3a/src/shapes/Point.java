@@ -30,6 +30,12 @@ public class Point extends ZeroDimensionalShape {
         this.z = z;
     }
 
+    @Override
+    public String toString() {
+        String details = "X: " + this.x + ", Y: " + this.y + ", Z: " + this.z;
+        return details;
+    }
+
     public boolean equals(Point otherPoint) {
         return (this.x == otherPoint.getX() && this.y == otherPoint.getY() && this.z == otherPoint.getZ());
     }
@@ -37,7 +43,7 @@ public class Point extends ZeroDimensionalShape {
     Point() {
         this.shapeID = nextShape();
     }
-    
+
     Point(Point otherPoint) {
         this.shapeID = nextShape();
         this.x = otherPoint.getX();

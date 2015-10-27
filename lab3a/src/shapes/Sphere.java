@@ -1,12 +1,28 @@
 package shapes;
 
-public class Circle extends TwoDimensionalShape {
+public class Sphere extends ThreeDimensionalShape {
 
     private double radius;
     private Point center;
 
     public double getRadius() {
         return radius;
+    }
+
+    public Point getCenter() {
+        return this.center;
+    }
+
+    @Override
+    public String toString() {
+        String details = "Sphere: " + this.getID() + ", Center: " + this.center + ", Radius: " + this.radius + ", Volume: " + this.getVolume();
+        return details;
+    }
+
+    public boolean equals(Sphere otherSphere) {
+
+        return (this.center.equals(otherSphere.getCenter()) && this.radius == otherSphere.getRadius());
+
     }
 
     public void setRadius(double newRadius) {
@@ -16,28 +32,27 @@ public class Circle extends TwoDimensionalShape {
             this.radius = newRadius;
         }
     }
-    
-    @Override
-    public String toString() {
-        String details = "Circle: " + this.getID() + ", Center: " + this.center + ", Radius: " + this.radius + ", Area: " + this.getArea();
-        return details;
-    }
 
     @Override
     public double getArea() {
         return (Math.PI * Math.pow(radius, 2));
     }
 
-    Circle() {
+    @Override
+    public double getVolume() {
+        return (Math.PI * Math.pow(radius, 3));
+    }
+
+    Sphere() {
         this.shapeID = nextShape();
     }
 
-    Circle(Point newCenter) {
+    Sphere(Point newCenter) {
         this.shapeID = nextShape();
         this.center = new Point(newCenter);
     }
 
-    Circle(Point newCenter, double newRadius) {
+    Sphere(Point newCenter, double newRadius) {
         this.shapeID = nextShape();
         this.center = new Point(newCenter);
         this.radius = Math.abs(newRadius);
