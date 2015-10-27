@@ -37,6 +37,20 @@ public class Point extends ZeroDimensionalShape {
     Point() {
         this.shapeID = nextShape();
     }
+    
+    Point(Point otherPoint) {
+        this.shapeID = nextShape();
+        this.x = otherPoint.getX();
+        this.y = otherPoint.getY();
+        this.z = otherPoint.getZ();
+    }
+
+    Point(int x, int y, int z) {
+        this.shapeID = nextShape();
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 
     @Override
     public void move(int x, int y, int z) {

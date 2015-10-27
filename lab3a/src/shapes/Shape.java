@@ -11,8 +11,7 @@ public abstract class Shape {
     public abstract void move(int x, int y, int z);
     
     public static int nextShape() {
-        nextShapeID++;
-        return nextShapeID;
+        return nextShapeID++;
     }
     
 }
