@@ -9,8 +9,39 @@ public class Sphere extends ThreeDimensionalShape {
         return radius;
     }
 
+    public void setRadius(double newRadius) {
+        if (newRadius < 0) {
+            System.out.println("Radius cannot be less than 0.");
+        } else {
+            this.radius = newRadius;
+        }
+    }
+
     public Point getCenter() {
         return this.center;
+    }
+
+    public void setCenter(int x, int y, int z) {
+        this.move(x, y, z);
+    }
+
+    public void setCenter(Point p) {
+        this.center.move(p);
+    }
+
+    @Override
+    public double getArea() {
+        return (Math.PI * Math.pow(radius, 2));
+    }
+
+    @Override
+    public double getVolume() {
+        return (Math.PI * Math.pow(radius, 3));
+    }
+
+    @Override
+    public void move(int x, int y, int z) {
+        this.center.move(x, y, z);
     }
 
     @Override
@@ -25,26 +56,9 @@ public class Sphere extends ThreeDimensionalShape {
 
     }
 
-    public void setRadius(double newRadius) {
-        if (newRadius < 0) {
-            System.out.println("Radius cannot be less than 0.");
-        } else {
-            this.radius = newRadius;
-        }
-    }
-
-    @Override
-    public double getArea() {
-        return (Math.PI * Math.pow(radius, 2));
-    }
-
-    @Override
-    public double getVolume() {
-        return (Math.PI * Math.pow(radius, 3));
-    }
-
     Sphere() {
         this.shapeID = nextShape();
+        this.center = new Point();
     }
 
     Sphere(Point newCenter) {
@@ -57,9 +71,11 @@ public class Sphere extends ThreeDimensionalShape {
         this.center = new Point(newCenter);
         this.radius = Math.abs(newRadius);
     }
-
-    @Override
-    public void move(int x, int y, int z) {
-        this.center.move(x, y, z);
+    
+    Sphere(Sphere s) {
+        this.shapeID = nextShape();
+        this.center = new Point(s.center);
+        this.radius = s.radius;
     }
+
 }

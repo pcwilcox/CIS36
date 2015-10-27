@@ -16,7 +16,12 @@ public class Circle extends TwoDimensionalShape {
             this.radius = newRadius;
         }
     }
-    
+
+    @Override
+    public void move(int x, int y, int z) {
+        this.center.move(x, y, z);
+    }
+
     @Override
     public String toString() {
         String details = "Circle: " + this.getID() + "\n Center: " + this.center + "\n Radius: " + this.radius + "\n Area: " + this.getArea();
@@ -30,6 +35,7 @@ public class Circle extends TwoDimensionalShape {
 
     Circle() {
         this.shapeID = nextShape();
+        this.center = new Point();
     }
 
     Circle(Point newCenter) {
@@ -42,9 +48,10 @@ public class Circle extends TwoDimensionalShape {
         this.center = new Point(newCenter);
         this.radius = Math.abs(newRadius);
     }
-
-    @Override
-    public void move(int x, int y, int z) {
-        this.center.move(x, y, z);
+    
+    Circle(Circle otherCircle) {
+        this.shapeID = nextShape();
+        this.center = new Point(otherCircle.center);
+        this.radius = otherCircle.radius;
     }
 }
