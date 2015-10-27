@@ -25,7 +25,7 @@ public class Line extends OneDimensionalShape {
     
     @Override
     public String toString() {
-        String details = "Start: " + this.start + ", End: " + this.end + ", Length: " + this.getLength();
+        String details = "Line: " + this.getID() + "\n Start: " + this.start + ", End: " + this.end + "\n Length: " + this.getLength();
         return details;
     }
 

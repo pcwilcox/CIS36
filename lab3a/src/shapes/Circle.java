@@ -19,7 +19,7 @@ public class Circle extends TwoDimensionalShape {
     
     @Override
     public String toString() {
-        String details = "Circle: " + this.getID() + ", Center: " + this.center + ", Radius: " + this.radius + ", Area: " + this.getArea();
+        String details = "Circle: " + this.getID() + "\n Center: " + this.center + "\n Radius: " + this.radius + "\n Area: " + this.getArea();
         return details;
     }
 

@@ -32,7 +32,7 @@ public class Point extends ZeroDimensionalShape {
 
     @Override
     public String toString() {
-        String details = "X: " + this.x + ", Y: " + this.y + ", Z: " + this.z;
+        String details = "Point: " + this.getID() + "\n X: " + this.x + ", Y: " + this.y + ", Z: " + this.z;
         return details;
     }
 
@@ -60,6 +60,9 @@ public class Point extends ZeroDimensionalShape {
 
     @Override
     public void move(int x, int y, int z) {
+        this.x += x;
+        this.y += y;
+        this.z += z;
 
     }
 

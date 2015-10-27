@@ -15,7 +15,7 @@ public class Sphere extends ThreeDimensionalShape {
 
     @Override
     public String toString() {
-        String details = "Sphere: " + this.getID() + ", Center: " + this.center + ", Radius: " + this.radius + ", Volume: " + this.getVolume();
+        String details = "Sphere: " + this.getID() + "\n Center: " + this.center + "\n Radius: " + this.radius + "\n Volume: " + this.getVolume();
         return details;
     }
 

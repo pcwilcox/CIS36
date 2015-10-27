@@ -14,9 +14,4 @@ public abstract class Shape {
         return nextShapeID++;
     }
     
-    @Override
-    public abstract String toString();
-    
-    //public abstract boolean equals(Shape otherShape);
-    
 }
