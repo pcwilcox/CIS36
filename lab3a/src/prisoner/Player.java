@@ -1,6 +1,6 @@
 package prisoner;
 
-public class Player {
+public abstract class Player {
 
     private int myScore;
     private String myName;
@@ -28,9 +28,7 @@ public class Player {
     ////// choice methods
     // provides the players choice for this round, returning true if the
     // player should cooperate, or false otherwise.
-    public boolean cooperate() {
-        return true;
-    }
+    public abstract boolean cooperate();
 
         // called by the simulation framework after each turn is completed
     // parameter reflects oppenents choice in that turn.

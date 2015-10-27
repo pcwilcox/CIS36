@@ -57,11 +57,11 @@ public class Simulation {
     }
 
     public static void main(String[] args) {
-        Simulation s = new Simulation(new Player("Player1"), new Player("Player2"), 20);
-        Simulation a = new Simulation(new Player("Player1"), new Competitor("Competitor2"), 20);
-        Simulation b = new Simulation(new Player("Player1"), new RandomChooser("RandomChooser2"), 20);
-        Simulation c = new Simulation(new Player("Player1"), new Unforgiving("Unforgiving2"), 20);
-        Simulation d = new Simulation(new Player("Player1"), new TitForTat("TitForTat2"), 20);
+        Simulation s = new Simulation(new Cooperator("Cooperator1"), new Cooperator("Cooperator"), 20);
+        Simulation a = new Simulation(new Cooperator("Cooperator"), new Competitor("Competitor2"), 20);
+        Simulation b = new Simulation(new Cooperator("Cooperator"), new RandomChooser("RandomChooser2"), 20);
+        Simulation c = new Simulation(new Cooperator("Cooperator"), new Unforgiving("Unforgiving2"), 20);
+        Simulation d = new Simulation(new Cooperator("Cooperator"), new TitForTat("TitForTat2"), 20);
         Simulation k = new Simulation(new Competitor("Competitor1"), new Competitor("Competitor2"), 20);
         Simulation e = new Simulation(new Competitor("Competitor1"), new RandomChooser("RandomChooser2"), 20);
         Simulation f = new Simulation(new Competitor("Competitor1"), new Unforgiving("Unforgiving2"), 20);
