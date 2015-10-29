@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Runner {
 
@@ -15,7 +16,43 @@ public class Runner {
         System.out.println("The last name is " + names.get(names.size() - 1));
         
         // Use an *anonymous* Comparator to find the longest name, or a name tied for longest.
+        Comparator longName = new Comparator() {
+            
+            public String longest() {
+                int maxIndex = 0;
+                int lastIndex = names.size() - 1;
+                for (int i = 0; i < lastIndex; i++) {
+                    if (compare(names.get(i), names.get(i + 1)) == 1) {
+                        maxIndex = i;
+                    }s
+                }
+                return names.get(maxIndex);
+            }
+            
+            @Override
+            public int compare(Object a, Object b) {
+                if (a == null || b == null) {
+                    throw new NullPointerException();
+                } else if (a instanceof String && b instanceof String) {
+                    String firstName = a.toString();
+                    String secondName = b.toString();
+                    
+                    if (firstName.length() < secondName.length()) {
+                        return -1;
+                    } else if (firstName.length() == secondName.length()) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                    
+                } else {
+                    throw new ClassCastException();
+                }
+                
+            }
+        };
         
+        System.out.println("Longest name: " + longName.longest());
         // Use an *anonymous* Comparator to find the name that is, backwards, alphanumerically last.
     }
     
