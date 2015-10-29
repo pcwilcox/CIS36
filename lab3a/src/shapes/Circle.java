@@ -18,7 +18,7 @@ public class Circle extends TwoDimensionalShape {
     }
 
     @Override
-    public void move(int x, int y, int z) {
+    public void move(double x, double y, double z) {
         this.center.move(x, y, z);
     }
 

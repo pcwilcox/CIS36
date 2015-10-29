@@ -5,7 +5,7 @@ public abstract class Shape {
     private static int nextShapeID = 0;
     protected int shapeID;
 
-    public abstract void move(int x, int y, int z);
+    public abstract void move(double x, double y, double z);
 
     public int getID() {
         return shapeID;

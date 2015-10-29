@@ -21,7 +21,7 @@ public class Sphere extends ThreeDimensionalShape {
         return this.center;
     }
 
-    public void setCenter(int x, int y, int z) {
+    public void setCenter(double x, double y, double z) {
         this.move(x, y, z);
     }
 
@@ -40,7 +40,7 @@ public class Sphere extends ThreeDimensionalShape {
     }
 
     @Override
-    public void move(int x, int y, int z) {
+    public void move(double x, double y, double z) {
         this.center.move(x, y, z);
     }
 

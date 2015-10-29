@@ -2,31 +2,31 @@ package shapes;
 
 public class Point extends ZeroDimensionalShape {
 
-    private int x;
-    private int y;
-    private int z;
+    private double x;
+    private double y;
+    private double z;
 
-    public int getX() {
+    public double getX() {
         return this.x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return this.y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public int getZ() {
+    public double getZ() {
         return this.z;
     }
 
-    public void setZ(int z) {
+    public void setZ(double z) {
         this.z = z;
     }
 
@@ -37,7 +37,7 @@ public class Point extends ZeroDimensionalShape {
     }
 
     @Override
-    public void move(int x, int y, int z) {
+    public void move(double x, double y, double z) {
         this.x += x;
         this.y += y;
         this.z += z;
@@ -67,7 +67,7 @@ public class Point extends ZeroDimensionalShape {
         this.z = otherPoint.getZ();
     }
 
-    Point(int x, int y, int z) {
+    Point(double x, double y, double z) {
         this.shapeID = nextShape();
         this.x = x;
         this.y = y;

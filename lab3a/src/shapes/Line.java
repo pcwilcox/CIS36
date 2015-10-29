@@ -9,7 +9,7 @@ public class Line extends OneDimensionalShape {
         return this.start;
     }
     
-    public void setStart(int x, int y, int z) {
+    public void setStart(double x, double y, double z) {
         this.start.move(x, y, z);
     }
     
@@ -21,7 +21,7 @@ public class Line extends OneDimensionalShape {
         return this.end;
     }
     
-    public void setEnd(int x, int y, int z) {
+    public void setEnd(double x, double y, double z) {
         this.end.move(x, y, z);
     }
     
@@ -30,7 +30,7 @@ public class Line extends OneDimensionalShape {
     }
     
     @Override
-    public void move(int x, int y, int z) {
+    public void move(double x, double y, double z) {
         this.start.move(x, y, z);
         this.end.move(x, y, z);
     }
