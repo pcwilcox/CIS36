@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class Runner {
-
+    
     public static void main(String[] args) {
         ArrayList<String> names = readnames();
         Collections.sort(names);  // uses the build in sorting for String
@@ -18,15 +18,8 @@ public class Runner {
         // Use an *anonymous* Comparator to find the longest name, or a name tied for longest.
         Comparator longName = new Comparator() {
             
-            public String longest() {
-                int maxIndex = 0;
-                int lastIndex = names.size() - 1;
-                for (int i = 0; i < lastIndex; i++) {
-                    if (compare(names.get(i), names.get(i + 1)) == 1) {
-                        maxIndex = i;
-                    }s
-                }
-                return names.get(maxIndex);
+            public String longest(ArrayList<String> names) {
+                // oh god what is going on 
             }
             
             @Override
@@ -52,7 +45,6 @@ public class Runner {
             }
         };
         
-        System.out.println("Longest name: " + longName.longest());
         // Use an *anonymous* Comparator to find the name that is, backwards, alphanumerically last.
     }
     
