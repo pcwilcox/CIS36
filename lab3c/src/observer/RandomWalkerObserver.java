@@ -9,6 +9,13 @@
 
 package observer;
 
-public class RandomWalkerObserver {
+import java.util.Observable;
+import java.util.Observer;
+
+public class RandomWalkerObserver implements Observer {
+    @Override
+    public void update(Observable o, Object arg) {
+        //idk do stuff
+    }
 
 }
