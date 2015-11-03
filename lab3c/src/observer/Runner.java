@@ -1,7 +1,7 @@
 
 package observer;
 
-import observerPattern.*;
+import java.util.Observer;
 
 
 public class Runner {
