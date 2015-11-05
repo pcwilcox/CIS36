@@ -2,6 +2,10 @@ package recursion;
 
 public class ReverseMethods {
 
+    public static void main(String[] args) {
+        String rev = "Reverseme";
+        System.out.println("Reversing " + rev + ": " + reverse17(rev));
+    }
     // returns the reverse of a one-length string.  Easy!
     public String reverse1(String s) {
         return s;
@@ -41,8 +45,12 @@ public class ReverseMethods {
                 + s.substring(0, 1);
     }
 
-    public String reverse17(String s) {
-       
+    public static String reverse17(String s) {
+       if (s.length() == 1) {
+           return s;
+       } else {
+           return s.substring(s.length() - 1) + reverse17(allButLast(s));
+       }
     }
 
     // helper methods you can use (you should use one of them)
