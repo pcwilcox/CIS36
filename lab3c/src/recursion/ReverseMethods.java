@@ -5,8 +5,12 @@ public class ReverseMethods {
     public static void main(String[] args) {
         String rev = "Reverseme";
         System.out.println("Reversing " + rev + ": " + reverse17(rev));
+
+        System.out.println("Reversing recursively: " + reverse(rev));
     }
+
     // returns the reverse of a one-length string.  Easy!
+
     public String reverse1(String s) {
         return s;
     }
@@ -46,11 +50,11 @@ public class ReverseMethods {
     }
 
     public static String reverse17(String s) {
-       if (s.length() == 1) {
-           return s;
-       } else {
-           return s.substring(s.length() - 1) + reverse17(allButLast(s));
-       }
+        if (s.length() == 1) {
+            return s;
+        } else {
+            return s.substring(s.length() - 1) + reverse17(allButLast(s));
+        }
     }
 
     // helper methods you can use (you should use one of them)
@@ -61,23 +65,21 @@ public class ReverseMethods {
 
     // returns a string  containing all the characters except the last
     public static String allButLast(String s) {
-        return s.substring(0, s.length()-1);
+        return s.substring(0, s.length() - 1);
     }
-
-    
 
     /*
      * Now, write a recursive solution to reverse without using any helper methods.
      * That is, reverse should only call reverse! (and some string manipulation methods).
      */
-    public String reverse(String s) {
+    public static String reverse(String s) {
 
-        if () {
-			// base case
-
+        if (s.length() == 1) {
+            // base case
+            return s;
         } else {
-			// the recursive case! 
-
+            // the recursive case! 
+            return reverse(s.substring(1)) + s.substring(0, 1);
         }
     }
 
