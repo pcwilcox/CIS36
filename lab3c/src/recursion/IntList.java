@@ -12,55 +12,52 @@ import java.util.Random;
 
 public class IntList {
 
-    public class IntNode {
+    private int value;
+    private IntList next = null;
 
-        private int value;
-        private IntNode next = null;
+    IntList(int value, IntList next) {
+        this.value = value;
+        this.next = next;
+    }
 
-        IntNode(int value, IntNode next) {
-            this.value = value;
-            this.next = next;
+    public IntList makeRandomNode(int count) {
+        Random r = new Random();
+
+        if (count > 0) {
+            return new IntList(r.nextInt(100), makeRandomNode(count - 1));
+        } else {
+            return null;
         }
+    }
 
-        public IntNode makeRandomNode(int count) {
-            Random r = new Random();
+    @Override
+    public String toString() {
+        return "(" + this.toStringHelper() + ")";
+    }
 
-            if (count > 0) {
-                return new IntNode(r.nextInt(100), makeRandomNode(count - 1));
-            } else {
-                return null;
-            }
+    public String toStringHelper() {
+        if (this.next == null) {
+            return Integer.toString(value);
+        } else {
+            return Integer.toBinaryString(value) + ", " + next.toStringHelper();
         }
+    }
 
-        @Override
-        public String toString() {
-            return "(" + this.toStringHelper() + ")";
+    public int length() {
+        if (next == null) {
+            return 1;
+        } else {
+            return 1 + next.length();
         }
+    }
 
-        public String toStringHelper() {
-            if (this.next == null) {
-                return Integer.toString(value);
-            } else {
-                return Integer.toBinaryString(value) + ", " + next.toStringHelper();
-            }
-        }
-
-        public int length() {
-            if (next == null) {
-                return 1;
-            } else {
-                return 1 + next.length();
-            }
-        }
-
-        public boolean contains(int target) {
-            if (value == target) {
-                return true;
-            } else if (next == null) {
-                return false;
-            } else {
-                return next.contains(target);
-            }
+    public boolean contains(int target) {
+        if (value == target) {
+            return true;
+        } else if (next == null) {
+            return false;
+        } else {
+            return next.contains(target);
         }
     }
 
