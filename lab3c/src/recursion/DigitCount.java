@@ -4,12 +4,15 @@ package recursion;
 public class DigitCount {
 
     public static void main(String[] args) {
+        int value = 1561984;
+        int valueCount = digitCount(value);
+        System.out.println("digits: " + valueCount);
     }
 
     // Fix the bug in digitCount so that it returns correct values.
     // You should only need to change one line!
     public static int digitCount(int value) {
-        if (value == 0) {
+        if (value < 10 && value > -10) {
             return 1;
         } else {
             return 1 + digitCount(value / 10);
