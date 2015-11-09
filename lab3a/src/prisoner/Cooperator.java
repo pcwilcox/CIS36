@@ -23,7 +23,7 @@ public class Cooperator extends Player {
         return super.score();
     }
 
-    // Competitor always competes
+    // Cooperator always cooperates
     @Override
     public boolean cooperate() {
         return true;

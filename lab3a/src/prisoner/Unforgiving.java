@@ -29,6 +29,8 @@ public class Unforgiving extends Player {
     ////// choice methods
     // provides the players choice for this round, returning true if the
     // player should cooperate, or false otherwise.
+    
+    // Chooses to cooperate until the other player chooses not to
     @Override
     public boolean cooperate() {
         if (opponentCompeted == true) {
@@ -42,7 +44,8 @@ public class Unforgiving extends Player {
     // called by the simulation framework after each turn is completed
     // parameter reflects oppenents choice in that turn.
     public void opponentChoice(boolean opponentCooperated) {
-        // default implementation does nothing with this information
+        // If the opponent chooses not to cooperate, this guy competes for the 
+        // rest of the game
         if (opponentCooperated == false) {
             opponentCompeted = true;
         }

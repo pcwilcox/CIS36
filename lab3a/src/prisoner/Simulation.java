@@ -19,9 +19,11 @@ public class Simulation {
 
         for (int k = 0; k < numberOfTurns; k++) {
 
+            // Get cooperate choices based off last turn.
             boolean p1Cooperated = p1.cooperate();
             boolean p2Cooperated = p2.cooperate();
 
+            // Set cooperate choices for next turn.
             p1.opponentChoice(p2Cooperated);
             p2.opponentChoice(p2Cooperated);
 
@@ -56,6 +58,7 @@ public class Simulation {
         System.out.println(" Player 2 (" + p2.getClass().getName() + ") has score = " + p2.score());
     }
 
+    // I feel like there's probably a smarter way to perform these tests - maybe using an arraylist or something
     public static void main(String[] args) {
         Simulation s = new Simulation(new Cooperator("Cooperator1"), new Cooperator("Cooperator"), 20);
         Simulation a = new Simulation(new Cooperator("Cooperator"), new Competitor("Competitor2"), 20);

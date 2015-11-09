@@ -10,6 +10,7 @@ public class AlienTester {
         singleOgre();
         singleMarsh();
         
+        // I thought it'd be neat to do this randomly
         randomPack(1);
         randomPack(5);
         randomPack(10);

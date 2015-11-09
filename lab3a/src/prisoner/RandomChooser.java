@@ -28,6 +28,8 @@ public class RandomChooser extends Player {
     ////// choice methods
     // provides the players choice for this round, returning true if the
     // player should cooperate, or false otherwise.
+    
+    // Random chooser chooses randomly
     @Override
     public boolean cooperate() {
         Random rand = new Random();

@@ -7,6 +7,9 @@ public class ShapeTester {
     public static void main(String[] args) {
         ArrayList<Shape> shapes = new ArrayList<>();
         
+        // I sorta picked these values at random. I suppose I could've imported 
+        // Random() and done it that way.
+        
         shapes.add(new Point(1, 2, 3));
         shapes.add(new Point(123, 18347, 82));
         shapes.add(new Line(new Point(1, 2, 3), new Point(8, 9, 10)));

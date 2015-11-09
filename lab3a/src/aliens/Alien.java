@@ -2,6 +2,7 @@ package aliens;
 
 public abstract class Alien {
 
+    // I dunno why I added health but it made sense
     private int health;
     private String name;
     private int damage;
