@@ -47,15 +47,12 @@ public class Runner {
         });
         
         System.out.println("The last name when considered backwards is: " + names.get(names.size() - 1));
-        // I put this here for verifying the result of the last anonymous class
-//        for (String name : names) {
-//            System.out.println(new StringBuilder(name).reverse().toString());
-//        }
 
     }
 
     public static void sortTest() {
 
+        // were we supposed to use this for something? It's unclear
     }
 
     // reads names from a file named "babynames.txt", which should be in 

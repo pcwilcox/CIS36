@@ -66,7 +66,8 @@ public class MyDate implements Comparable {
     public String toString() {
         return (this.getMonthString() + " " + this.day);
     }
-
+    
+    // I couldn't really handle not throwing exceptions on this one
     @Override
     public int compareTo(Object otherDate) {
         if (otherDate == null) {
