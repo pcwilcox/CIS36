@@ -1,5 +1,6 @@
 package recur;
 
+import java.util.HashSet;
 import java.util.Random;
 
 /**
@@ -93,23 +94,71 @@ public class IntList {
             return true;
         }
     }
-    
+
     public boolean allEvenIteratively() {
         IntList x = this;
         if (x.value % 2 != 0) {
             return false;
         } else {
-            
-        
-        while (x.next != null) {
-            x = x.next;
-            if (x.value % 2 != 0) {
-                return false;
+
+            while (x.next != null) {
+                x = x.next;
+                if (x.value % 2 != 0) {
+                    return false;
+                }
             }
         }
-        }
-        
+
         return true;
+    }
+
+    public void printCol() {
+        if (next == null) {
+            System.out.println(value + " DONE");
+        } else {
+            System.out.println(value);
+            next.printCol();
+        }
+    }
+
+    public void setNext(IntList nextNode) {
+        this.next = nextNode;
+    }
+
+    public void attachTailToHead() {
+        if (next == null) {
+            // already at the end
+        } else {
+            next.attachTailToHeadHelper(this);
+        }
+    }
+
+    private void attachTailToHeadHelper(IntList head) {
+        if (next == null) {
+            next = head;
+            System.out.println("Attached tail to head!");
+        } else {
+            next.attachTailToHeadHelper(head);
+        }
+
+    }
+
+    public void insert(IntList newNode) {
+        newNode.next = this.next;
+        this.next = newNode;
+    }
+
+    public void zip(IntList other) {
+        if (next == null) {
+            next = other;
+        } else if (other == null) {
+            return; // nothing left to insert
+        } else {
+            IntList origNext = next;
+            IntList otherNext = other.next;
+//            next = origNext.zip(otherNext);
+//            next.next =
+        }
     }
 
     public static void main(String[] args) {
@@ -125,6 +174,48 @@ public class IntList {
         System.out.println("Sum: " + t.sum());
         System.out.println("allEven = " + t.allEven());
         System.out.println("allEvenIteratively = " + t.allEvenIteratively());
+
+        // Throws stack overflow
+//      intListLoop();
+        // So does this!
+//      tailToHeadTest();
+        insertTest();
+    }
+
+    public static void insertTest() {
+        IntList start = makeIntListRandomly(5);
+        System.out.println("Insertion test, this is the list to start: " + start);
+
+        IntList insert = makeIntListRandomly(1);
+        System.out.println("Inserting " + insert);
+        start.insert(insert);
+
+        System.out.println("New list: " + start);
+    }
+
+    public static void tailToHeadTest() {
+        System.out.println("Running a tail-to-head test: ");
+        IntList tailHead = makeIntListRandomly(10);
+
+        tailHead.attachTailToHead();
+
+        tailHead.contains(5);
+    }
+
+    public static void intListLoop() {
+        System.out.println("Running a loop test:");
+        IntList loop1 = new IntList(1, null);
+        IntList loop2 = new IntList(2, null);
+        IntList loop3 = new IntList(3, null);
+
+        loop1.setNext(loop2);
+
+        System.out.println(loop1);
+        loop2.setNext(loop3);
+        System.out.println(loop1);
+        loop3.setNext(loop1);
+        System.out.println(loop1);
+
     }
 }
 
