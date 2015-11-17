@@ -31,6 +31,14 @@ public class IntList {
         }
     }
 
+    public static IntList makeOrderedList(int count) {
+        if (count > 0) {
+            return new IntList(count, makeOrderedList(count - 1));
+        } else {
+            return null;
+        }
+    }
+
     // Recursive printing of IntLists
     @Override
     public String toString() {
@@ -127,7 +135,7 @@ public class IntList {
 
     public void attachTailToHead() {
         if (next == null) {
-            // already at the end
+            next = this;
         } else {
             next.attachTailToHeadHelper(this);
         }
@@ -156,8 +164,9 @@ public class IntList {
         } else {
             IntList origNext = next;
             IntList otherNext = other.next;
-//            next = origNext.zip(otherNext);
-//            next.next =
+            next = other;
+            other.zip(origNext);
+
         }
     }
 
@@ -180,6 +189,18 @@ public class IntList {
         // So does this!
 //      tailToHeadTest();
         insertTest();
+        zipTest();
+    }
+
+    public static void zipTest() {
+        IntList zipper = makeOrderedList(10);
+        IntList zipped = makeOrderedList(10);
+
+        System.out.println("Zipper: " + zipper);
+        System.out.println("Zipped: " + zipped);
+        System.out.println("Let's zip them up!");
+        zipper.zip(zipped);
+        System.out.println("After zipping: " + zipper);
     }
 
     public static void insertTest() {
