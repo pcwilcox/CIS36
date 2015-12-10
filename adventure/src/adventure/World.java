@@ -33,6 +33,9 @@ public class World {
         
         
         //create and add rooms
+        
+        Room bridge = new Room("Main Bridge", "placeholder text");
+        
 
         
         //connect the rooms
@@ -43,6 +46,7 @@ public class World {
         
     }
 
+    
     
     public void addRoom(Room room) {
         rooms.add(room);
@@ -81,15 +85,16 @@ public class World {
     
     
     private void printWelcome() {
-        System.out.println("Welcome to Adventure. ");
-        System.out.println("Your goal is to find inner peace, or at least food.");
-        System.out.println();
-        
-        System.out.println(
-             "After a long night out studying the vargaries of Java programming, \n" +
-             "you wake up in a strange room.  Perhaps this really is your bedroom, \n" +
-             "and you are just suffering from another bout of amnesia...  or perhaps \n" +
-             "not..."
+        System.out.println("Welcome to Damage Control. \n" +
+                "You are the engineer aboard the  the starship Aasimov. The \n" +
+                "ship was carrying passengers in cryo-sleep on a journey to Europa, \n" +
+                "one of Jupiter's moons. You would not be woken up during a normal \n" +
+                "transit except in cases of malfunction or emergency.\n\n" +
+                "You are surprised to be awakened well ahead of scheduled arrival. \n" +
+                "The sound of warning klaxons fills the air amidst the flashing \n" +
+                "emergency lighting. This can't be good.\n\n" +
+                "You will need to find and repair any damage to the ship, then re-enable \n" +
+                "the autopilot in order to succeed. Good luck."
         );
         System.out.println();
         getCurrentRoom().printDescription();

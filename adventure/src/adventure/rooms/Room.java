@@ -3,11 +3,14 @@ package adventure.rooms;
 import adventure.items.Item;
 import java.util.ArrayList;
 
-public class Room{
+public class Room {
 
     // protected because subclasses can get to it...
     protected String name;
     protected String description;
+    
+    // Rooms that aren't pressurized require a spacesuit
+    protected boolean pressurized;
 
     private ArrayList<Path> exits;
     private ArrayList<Item> items;
