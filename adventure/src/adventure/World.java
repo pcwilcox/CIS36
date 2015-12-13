@@ -26,6 +26,7 @@ public class World {
         thePlayer = new Player(this);
 
         // create the items
+        
         //create and add rooms
         Room bridge = new Room("Main Bridge",
                 "You are on the bridge");
@@ -112,6 +113,7 @@ public class World {
         bridge.addExit(navConsole, "Navigation Console");
         bridge.addExit(captainChair, "Captain's Chair");
         bridge.addExit(bridgeComputer, "Main Computer");
+        
 
         navConsole.addExit(bridge, "Bridge");
         
@@ -122,6 +124,8 @@ public class World {
         corridorUpperForward.addExit(bridge, "Bridge");
         corridorUpperForward.addExit(corridorUpperPort, "port");
         corridorUpperForward.addExit(corridorUpperStarboard, "starboard");
+        corridorUpperForward.setPressure(false);
+        
         
         corridorUpperPort.addExit(corridorUpperForward, "forward");
         corridorUpperPort.addExit(corridorUpperAft, "aft");

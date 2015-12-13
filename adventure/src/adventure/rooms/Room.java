@@ -10,7 +10,7 @@ public class Room {
     protected String description;
     
     // Rooms that aren't pressurized require a spacesuit
-    protected boolean pressurized;
+    protected boolean pressure;
 
     private ArrayList<Path> exits;
     private ArrayList<Item> items;
@@ -33,6 +33,9 @@ public class Room {
     public void addExit(Room target, String dir) {
         Path path = new Path(this, target, dir);
         exits.add(path);
+        if (target.getPressure() == false) {
+            path.setBlocked(true);
+        }
     }
 
 
@@ -67,6 +70,9 @@ public class Room {
         //check if this is a valid direction
         Path path = getExit(direction);
         if (path != null) {
+            if (path.getBlocked()) {
+                return null;
+            }
             if (exitRoom())  {            
                 return path.travelDestination();
             }
@@ -159,7 +165,13 @@ public class Room {
     }
 
     
+    public void setPressure(boolean p) {
+        pressure = p;
+    }
     
+    public boolean getPressure() {
+        return pressure;
+    }
 
 
 } // end Room

@@ -6,6 +6,7 @@ public class Path {
     private Room target;
     private String direction;
     private String description;
+    private boolean blocked = false;
     
     public Path(Room source, Room target, String dir) {
         setSource(source);
@@ -40,6 +41,14 @@ public class Path {
     // returns the Room that the player traveling this path arrives at
     public Room travelDestination() {
         return target;
+    }
+    
+    public void setBlocked(boolean b) {
+        blocked = b;
+    }
+    
+    public boolean getBlocked() {
+        return blocked;
     }
     
 }  // end class Path
