@@ -1,5 +1,8 @@
 package adventure.rooms;
 
+import adventure.rooms.Path;
+import adventure.rooms.Room;
+
 /* Most paths between compartments have hatches between them. In normal operation
    they will open automatically, but since this is an emergency...
 */
