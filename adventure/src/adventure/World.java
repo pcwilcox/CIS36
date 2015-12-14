@@ -1,6 +1,6 @@
 package adventure;
 
-import adventure.rooms.Room;
+import adventure.rooms.*;
 import adventure.command.Command;
 import java.util.*;
 import java.io.*;
@@ -107,6 +107,13 @@ public class World {
         Room cryo4 = new Room("CryoSleep Three - Lower Deck - Port",
                 "Lower port cryo chamber");
         addRoom(cryo4);
+        
+        Lift lift = new Lift("Main Lift",
+                "main lift",
+                corridorUpperForward);
+        addRoom(lift);
+        
+        lift.addDeck(corridorLowerForward);
 
         //connect the rooms
         bridge.addExit(corridorUpperForward, "out");
@@ -172,6 +179,7 @@ public class World {
         
         cryo4.addExit(corridorLowerPort, "out");
 
+        
         // set current position
         setCurrentRoom(rooms.get(0));
 
