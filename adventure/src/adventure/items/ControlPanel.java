@@ -18,6 +18,10 @@ public class ControlPanel extends Item {
         this.target = target;
     }
     
+    public Hatch getTarget() {
+        return target;
+    }
+    
     
     @Override
     public boolean use(Room currentRoom, Player player) {

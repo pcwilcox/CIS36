@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class Lift extends Room {
 
     private Room currentDeck;
-    private Path currentExit;
 
     private ArrayList<Room> decks;
 
@@ -41,8 +40,8 @@ public class Lift extends Room {
 
     @Override
     public void printExits() {
-        if (currentExit != null) {
-            System.out.println("The lift is currently on " + currentExit.getDirection());
+        if (currentDeck != null) {
+            System.out.println("The lift is currently on " + currentDeck);
         }
     }
 
