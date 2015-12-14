@@ -9,18 +9,19 @@ package adventure.rooms;
 // on the other side. They can be manipulated with control panels.
 
 public class Hatch extends Path {
-    private boolean sealed;
+
+    
+    public Hatch(Room source, Room target, String dir) {
+        super(source, target, dir);
+        this.blocked = false;
+        super.setBlockDescription("The hatch does not open.");
+    }
     
     public Hatch(Room source, Room target, String dir, boolean sealed) {
         super(source, target, dir);
-        this.sealed = sealed;
+        this.blocked = sealed;
+        super.setBlockDescription("The hatch does not open.");
     }
     
-    public void setSealed(boolean s) {
-        sealed = s;
-    }
     
-    public boolean getSealed() {
-        return sealed;
-    }
 }

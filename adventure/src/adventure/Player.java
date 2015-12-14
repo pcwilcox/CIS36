@@ -3,6 +3,7 @@ package adventure;
 import adventure.items.Item;
 import adventure.rooms.Room;
 import adventure.command.Command;
+import adventure.rooms.Path;
 import java.util.ArrayList;
 
 
@@ -94,10 +95,11 @@ public class Player {
     public void actionTravel(Command turn) {
         String newDir = turn.getDirectionReference();
         Room newRoom = currentRoom.tryToExit(newDir);
+        Path path = this.currentRoom.getExit(newDir);
         if (newRoom == null) {
             System.out.println("You can't go that direction from here.");
         } else {
-            if (newRoom.enterRoom()) {
+            if (newRoom.enterRoom(path)) {
                 currentRoom = newRoom;
             } else {
                 System.out.println("You can't go there.");

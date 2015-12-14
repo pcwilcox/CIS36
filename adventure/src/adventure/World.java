@@ -80,7 +80,7 @@ public class World {
                 "The main engineering compartment");
         addRoom(engineering);
 
-        Room cargo = new Room("Main Cargo Hold",
+        Room cargo = new Room("Main Cargoout Hold",
                 "The main cargo hold");
         addRoom(cargo);
 
@@ -116,7 +116,7 @@ public class World {
         lift.addDeck(corridorLowerForward);
 
         //connect the rooms
-        bridge.addExit(corridorUpperForward, "out");
+        bridge.addHatch(corridorUpperForward, "out");
         bridge.addExit(navConsole, "Navigation Console");
         bridge.addExit(captainChair, "Captain's Chair");
         bridge.addExit(bridgeComputer, "Main Computer");
@@ -128,56 +128,58 @@ public class World {
         
         bridgeComputer.addExit(bridge, "Bridge");
         
-        corridorUpperForward.addExit(bridge, "Bridge");
+        corridorUpperForward.addHatch(bridge, "Bridge");
         corridorUpperForward.addExit(corridorUpperPort, "port");
         corridorUpperForward.addExit(corridorUpperStarboard, "starboard");
+        corridorUpperForward.addHatch(lift, "Lift");
         corridorUpperForward.setPressure(false);
         
         
         corridorUpperPort.addExit(corridorUpperForward, "forward");
         corridorUpperPort.addExit(corridorUpperAft, "aft");
-        corridorUpperPort.addExit(cryo2, "Cryo 2");
+        corridorUpperPort.addHatch(cryo2, "Cryo 2");
         
         corridorUpperStarboard.addExit(corridorUpperForward, "forward");
         corridorUpperStarboard.addExit(corridorUpperAft, "aft");
-        corridorUpperStarboard.addExit(cryo1, "Cryo 1");
+        corridorUpperStarboard.addHatch(cryo1, "Cryo 1");
         
         corridorUpperAft.addExit(corridorUpperStarboard, "starboard");
         corridorUpperAft.addExit(corridorUpperPort, "port");
 
-        corridorLowerForward.addExit(cargo, "cargo hold");
+        corridorLowerForward.addHatch(cargo, "cargo hold");
+        
         corridorLowerForward.addExit(corridorLowerPort, "port");
         corridorLowerForward.addExit(corridorLowerStarboard, "starboard");
         
         corridorLowerPort.addExit(corridorLowerForward, "forward");
         corridorLowerPort.addExit(corridorLowerAft, "aft");
-        corridorLowerPort.addExit(cryo4, "cryo");
+        corridorLowerPort.addHatch(cryo4, "cryo");
 
         corridorLowerStarboard.addExit(corridorLowerForward, "forward");
         corridorLowerStarboard.addExit(corridorLowerAft, "aft");
-        corridorLowerStarboard.addExit(cryo3, "cryo 3");
+        corridorLowerStarboard.addHatch(cryo3, "cryo 3");
 
         corridorLowerAft.addExit(corridorLowerPort, "port");
         corridorLowerAft.addExit(corridorLowerStarboard, "starboard");
-        corridorLowerAft.addExit(engineering, "engineering");
+        corridorLowerAft.addHatch(engineering, "engineering");
         
-        engineering.addExit(corridorLowerAft, "out");
+        engineering.addHatch(corridorLowerAft, "out");
         engineering.addExit(engine, "engine");
         engineering.addExit(lifeSupport, "life support");
         
-        cargo.addExit(corridorLowerForward, "out");
+        cargo.addHatch(corridorLowerForward, "out");
         
         engine.addExit(engineering, "out");
         
         lifeSupport.addExit(engineering, "out");
         
-        cryo1.addExit(corridorUpperStarboard, "out");
+        cryo1.addHatch(corridorUpperStarboard, "out");
         
-        cryo2.addExit(corridorUpperPort, "out");
+        cryo2.addHatch(corridorUpperPort, "out");
 
-        cryo3.addExit(corridorLowerStarboard, "out");
+        cryo3.addHatch(corridorLowerStarboard, "out");
         
-        cryo4.addExit(corridorLowerPort, "out");
+        cryo4.addHatch(corridorLowerPort, "out");
 
         
         // set current position

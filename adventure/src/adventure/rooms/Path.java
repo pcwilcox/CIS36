@@ -6,7 +6,8 @@ public class Path {
     private Room target;
     private String direction;
     private String description;
-    private boolean blocked = false;
+    protected String blockDescription;
+    protected boolean blocked = false;
     
     public Path(Room source, Room target, String dir) {
         setSource(source);
@@ -42,13 +43,27 @@ public class Path {
     public Room travelDestination() {
         return target;
     }
-    
+
+    // If there's like debris blocking the path or something
     public void setBlocked(boolean b) {
         blocked = b;
     }
     
     public boolean getBlocked() {
         return blocked;
+    }
+    
+    // Prints reason the path is blocked    
+    public void printBlocked() {
+        System.out.println(blockDescription);
+    }
+    
+    public String getBlockDescription() {
+        return blockDescription;
+    }
+    
+    public void setBlockDescription(String desc) {
+        blockDescription = desc;
     }
     
 }  // end class Path

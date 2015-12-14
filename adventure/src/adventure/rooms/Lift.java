@@ -16,12 +16,14 @@ public class Lift extends Room {
 
     public Lift(String name, String desc) {
         super(name, desc);
+        decks = new ArrayList<Room>();
     }
 
     public Lift(String name, String desc, Room deck) {
         super(name, desc);
+        decks = new ArrayList<Room>();
         currentDeck = deck;
-        super.addExit(deck, "out");
+        super.addHatch(deck, "out");
         decks.add(deck);
     }
     

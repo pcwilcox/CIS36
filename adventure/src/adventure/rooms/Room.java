@@ -34,15 +34,25 @@ public class Room {
         exits.add(path);
     }
 
+    // Adds a hatch instead of an exit
+    // Checks getPressure() on both sides in order to automatically seal the hatch
+    public void addHatch(Room target, String dir) {
+        boolean sealed = true;
+        if (target.getPressure() == true && this.getPressure() == true) {
+            sealed = false;
+        }
+        
+        Hatch hatch = new Hatch(this, target, dir, sealed);
+        
+        exits.add(hatch);
+    }
+    
+    // Adds a hatch instead of an exit
+    // This overloaded version allows sealed to be set manually
     public void addHatch(Room target, String dir, boolean sealed) {
         Hatch hatch = new Hatch(this, target, dir, sealed);
 
         exits.add(hatch);
-
-        if (target.getPressure() == false) {
-            hatch.setSealed(true);
-        }
-
     }
 
     public boolean getPressure() {
@@ -60,7 +70,10 @@ public class Room {
     // method that gets called when you first enter a room; returns a boolean
     // indicating whether entry was sucessful.
     // This might get overridden by subclasses if something fancy should happen.
-    public boolean enterRoom() {
+    public boolean enterRoom(Path p) {
+        if (p.getBlocked()) {
+            return false;
+        }
         printDescription();
         return true;
     }
@@ -78,11 +91,11 @@ public class Room {
         //check if this is a valid direction
         Path path = getExit(direction);
         if (path != null) {
-            if (path.getBlocked()) {
-                return null;
-            }
-            if (exitRoom()) {
-                return path.travelDestination();
+            if (path.getTarget().enterRoom(path)) {
+                return path.getTarget();
+            } else {
+                path.printBlocked();
+                return this;
             }
         }
         return null;
@@ -106,6 +119,9 @@ public class Room {
             int i = 0;
             System.out.print("The exits are ");
             for (Path p : exits) {
+                if (p instanceof Hatch) {
+                    System.out.print("a hatch leading to ");
+                }
                 System.out.print(p.getDirection());
                 i++;
                 if (i != exits.size()) {
