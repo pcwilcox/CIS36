@@ -26,7 +26,6 @@ public class World {
         thePlayer = new Player(this);
 
         // create the items
-        
         //create and add rooms
         Room bridge = new Room("Main Bridge",
                 "You are on the bridge");
@@ -107,50 +106,97 @@ public class World {
         Room cryo4 = new Room("CryoSleep Three - Lower Deck - Port",
                 "Lower port cryo chamber");
         addRoom(cryo4);
-        
+
         Lift lift = new Lift("Main Lift",
                 "main lift",
                 corridorUpperForward);
         addRoom(lift);
+
+        Room cargoLock = new Room("Cargo Bay - Main Airlock",
+                "Main cargo airlock.");
+        addRoom(cargoLock);
+
+        Room airlock = new Room("Upper Deck - Main Airlock",
+                "Main personnel airlock.");
+        addRoom(airlock);
+
+        Space extUpperAft = new Space("External Hull - Upper Deck - Aft",
+                "Outside the personnel airlock.");
+        addRoom(extUpperAft);
+
+        Space extUpperForward = new Space("External Hull - Upper Deck - Forward",
+                "Outside the main bridge.");
+        addRoom(extUpperForward);
+
+        Space extUpperStarboard = new Space("External Hull - Upper Deck - Starboard",
+                "Outside the upper deck.");
+        addRoom(extUpperStarboard);
+
+        Space extUpperPort = new Space("External Hull - Upper Deck - Port",
+                "Outside the upper deck.");
+        addRoom(extUpperPort);
+
+        Space extLowerAft = new Space("External Hull - Lower Deck - Aft",
+                "Outside the personnel airlock.");
+        addRoom(extLowerAft);
+
+        Space extLowerForward = new Space("External Hull - Lower Deck - Forward",
+                "Outside the main bridge.");
+        addRoom(extLowerForward);
+
+        Space extLowerStarboard = new Space("External Hull - Lower Deck - Starboard",
+                "Outside the upper deck.");
+        addRoom(extLowerStarboard);
+
+        Space extLowerPort = new Space("External Hull - Lower Deck - Port",
+                "Outside the upper deck.");
+        addRoom(extLowerPort);
+
+        Space extTop = new Space("External Hull - Above the atrium",
+                "Outside the atrium's observation dome");
+        addRoom(extTop);
+        
+        Space extBottom = new Space("External Hull - Engines",
+                "Outside the main engines");
+        addRoom(extBottom);
         
         lift.addDeck(corridorLowerForward);
+        lift.addDeck(corridorUpperForward);
 
         //connect the rooms
         bridge.addHatch(corridorUpperForward, "out");
         bridge.addExit(navConsole, "Navigation Console");
         bridge.addExit(captainChair, "Captain's Chair");
         bridge.addExit(bridgeComputer, "Main Computer");
-        
 
         navConsole.addExit(bridge, "Bridge");
-        
+
         captainChair.addExit(bridge, "Bridge");
-        
+
         bridgeComputer.addExit(bridge, "Bridge");
-        
+
         corridorUpperForward.addHatch(bridge, "Bridge");
         corridorUpperForward.addExit(corridorUpperPort, "port");
         corridorUpperForward.addExit(corridorUpperStarboard, "starboard");
         corridorUpperForward.addHatch(lift, "Lift");
         corridorUpperForward.setPressure(false);
-        
-        
+
         corridorUpperPort.addExit(corridorUpperForward, "forward");
         corridorUpperPort.addExit(corridorUpperAft, "aft");
         corridorUpperPort.addHatch(cryo2, "Cryo 2");
-        
+
         corridorUpperStarboard.addExit(corridorUpperForward, "forward");
         corridorUpperStarboard.addExit(corridorUpperAft, "aft");
         corridorUpperStarboard.addHatch(cryo1, "Cryo 1");
-        
+
         corridorUpperAft.addExit(corridorUpperStarboard, "starboard");
         corridorUpperAft.addExit(corridorUpperPort, "port");
 
         corridorLowerForward.addHatch(cargo, "cargo hold");
-        
+
         corridorLowerForward.addExit(corridorLowerPort, "port");
         corridorLowerForward.addExit(corridorLowerStarboard, "starboard");
-        
+
         corridorLowerPort.addExit(corridorLowerForward, "forward");
         corridorLowerPort.addExit(corridorLowerAft, "aft");
         corridorLowerPort.addHatch(cryo4, "cryo");
@@ -162,25 +208,90 @@ public class World {
         corridorLowerAft.addExit(corridorLowerPort, "port");
         corridorLowerAft.addExit(corridorLowerStarboard, "starboard");
         corridorLowerAft.addHatch(engineering, "engineering");
-        
+
         engineering.addHatch(corridorLowerAft, "out");
         engineering.addExit(engine, "engine");
         engineering.addExit(lifeSupport, "life support");
-        
+
         cargo.addHatch(corridorLowerForward, "out");
-        
+
+        cargo.addExit(cargoLock, "airlock");
+
         engine.addExit(engineering, "out");
-        
+
         lifeSupport.addExit(engineering, "out");
-        
+
         cryo1.addHatch(corridorUpperStarboard, "out");
-        
+
         cryo2.addHatch(corridorUpperPort, "out");
 
         cryo3.addHatch(corridorLowerStarboard, "out");
-        
+
         cryo4.addHatch(corridorLowerPort, "out");
 
+        airlock.addHatch(corridorUpperAft, "in");
+
+        corridorUpperAft.addHatch(airlock, "out", true);
+
+        airlock.setPressure(false);
+
+        airlock.addHatch(extUpperAft, "out", true);
+
+        cargoLock.addHatch(extLowerForward, "out", true);
+        cargoLock.addHatch(cargo, "in", true);
+        cargoLock.setPressure(false);
+
+        
+        extUpperAft.addExit(extTop, "up");
+        extUpperAft.addExit(extUpperStarboard, "starboard");
+        extUpperAft.addExit(extUpperPort, "port");
+        extUpperAft.addExit(extLowerAft, "down");
+        
+        extUpperPort.addExit(extTop, "up");
+        extUpperPort.addExit(extUpperForward, "forward");
+        extUpperPort.addExit(extUpperAft, "aft");
+        extUpperPort.addExit(extLowerPort, "down");
+        
+        extUpperStarboard.addExit(extTop, "up");
+        extUpperStarboard.addExit(extUpperAft, "aft");
+        extUpperStarboard.addExit(extUpperForward, "forward");
+        extUpperStarboard.addExit(extLowerStarboard, "down");
+        
+        extUpperForward.addExit(extTop, "up");
+        extUpperForward.addExit(extUpperPort, "port");
+        extUpperForward.addExit(extUpperStarboard, "starboard");
+        extUpperForward.addExit(extLowerForward, "down");
+        
+        extTop.addExit(extUpperForward, "forward");
+        extTop.addExit(extUpperPort, "port");
+        extTop.addExit(extUpperStarboard, "starboard");
+        extTop.addExit(extUpperAft, "aft");
+        
+        extLowerAft.addExit(extUpperAft, "up");
+        extLowerAft.addExit(extLowerPort, "port");
+        extLowerAft.addExit(extLowerStarboard, "starboard");
+        extLowerAft.addExit(extBottom, "down");
+        
+        extLowerPort.addExit(extUpperPort, "up");
+        extLowerPort.addExit(extLowerForward, "forward");
+        extLowerPort.addExit(extLowerAft, "aft");
+        extLowerPort.addExit(extBottom, "down");
+        
+        extLowerStarboard.addExit(extUpperStarboard, "up");
+        extLowerStarboard.addExit(extLowerForward, "forward");
+        extLowerStarboard.addExit(extLowerAft, "aft");
+        extLowerStarboard.addExit(extBottom, "down");
+        
+        extLowerForward.addExit(extUpperForward, "up");
+        extLowerForward.addExit(extLowerPort, "port");
+        extLowerForward.addExit(extLowerStarboard, "starboard");
+        extLowerForward.addExit(extBottom, "down");
+        extLowerForward.addHatch(cargoLock, "in", true);
+        
+        extBottom.addExit(extLowerForward, "forward");
+        extBottom.addExit(extLowerPort, "port");
+        extBottom.addExit(extLowerStarboard, "starboard");
+        extBottom.addExit(extLowerAft, "aft");
         
         // set current position
         setCurrentRoom(rooms.get(0));
