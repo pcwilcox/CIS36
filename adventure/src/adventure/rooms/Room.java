@@ -111,6 +111,16 @@ public class Room {
         }
         return null;
     }
+    
+    // Overloaded method returns the connecting hatchway
+    public Path getExit(Room target) {
+        for (Path p : exits) {
+            if (p.getTarget().equals(target)) {
+                return p;
+            }
+        }
+        return null;
+    }
 
     public void printExits() {
         if (exits.size() == 0) {

@@ -71,4 +71,19 @@ public class Lift extends Room {
     public ArrayList<Room> getDecks() {
         return decks;
     }
+    
+    public Room nextDeck() {
+        int size = decks.size();
+        
+        for (int i = 0; i < size; i++) {
+            if (currentDeck == decks.get(i)) {
+                if (i < size - 1) {
+                    return decks.get(i + 1);
+                } else {
+                    return decks.get(0);
+                }
+            }
+        }
+        
+    }
 }
