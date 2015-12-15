@@ -3,7 +3,7 @@ package adventure.items;
 import adventure.Player;
 import adventure.rooms.Room;
 
-public class Item{
+public abstract class Item{
 
     private String name;
     private String description;

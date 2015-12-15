@@ -3,6 +3,7 @@ package adventure;
 import adventure.items.Item;
 import adventure.rooms.Room;
 import adventure.command.Command;
+import adventure.items.Wearable;
 import adventure.rooms.Path;
 import java.util.ArrayList;
 
@@ -13,16 +14,19 @@ public class Player {
     private Room currentRoom;
     private String myName = "";
     private ArrayList<Item> myItems;
+    private ArrayList<Wearable> worn;
     
     public Player(World world) {
         myWorld = world;
         myItems = new ArrayList<Item>();
+        worn = new ArrayList<Wearable>();
     }
     
     public Player(String name, World world) {
         myName = name;
         myWorld = world;
         myItems = new ArrayList<Item>();
+        worn = new ArrayList<Wearable>();
     }
 
     public void setCurrentRoom(Room room) {
