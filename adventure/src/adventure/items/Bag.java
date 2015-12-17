@@ -1,5 +1,6 @@
 package adventure.items;
 
+import adventure.Player;
 import java.util.ArrayList;
 
 // A bag is a container that is takeable and wearable (a backpack, for example)
@@ -15,6 +16,18 @@ public class Bag extends Takeable implements Wearable, Container {
         super(name, description);
         items = new ArrayList<Item>();
         capacity = cap;
+    }
+    
+    public boolean isFull() {
+        if (items.size() == capacity) {
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public String toString() {
+        return "Name: " + super.getName() + ", Desc: " + super.getDescription() + ", Cap: " + capacity;
     }
 
     @Override
@@ -55,13 +68,13 @@ public class Bag extends Takeable implements Wearable, Container {
     }
 
     // Put an item in the bag
-    public boolean addItem(Item i) {
+    public boolean addItem(Item i, Player p) {
         if (i == null) {
             throw new NullPointerException();
-        } else if (i instanceof Takeable) {
+        } else if (i.canTake()) {
             if (items.size() < capacity) {
                 items.add(i);
-                // figure out how to remove the item from wherever it came from
+                p.removeItem(i);
                 return true;
             } else {
                 System.out.println("There isn't enough room in the " + this.getName() + ".");

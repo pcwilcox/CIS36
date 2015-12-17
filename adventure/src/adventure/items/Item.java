@@ -21,6 +21,9 @@ public abstract class Item{
         return description;
     }
 
+    public boolean canTake() {
+        return canTake;
+    }
     
     public String getName() {
         return name;

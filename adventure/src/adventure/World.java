@@ -2,8 +2,9 @@ package adventure;
 
 import adventure.rooms.*;
 import adventure.command.Command;
+import adventure.items.Bag;
+import adventure.items.Container;
 import java.util.*;
-import java.io.*;
 
 // The world contains the rooms, the player, and where the player is
 public class World {
@@ -295,6 +296,11 @@ public class World {
         
         // set current position
         setCurrentRoom(rooms.get(0));
+        Bag bag = new Bag("bag", "a bag", 3);
+        bridge.addItem(bag);
+        System.out.println(bag);
+        
+        interfaceTester();
 
     }
 
@@ -380,5 +386,15 @@ public class World {
         gameOver();
     }
 
+    public void interfaceTester() {
+        Bag bag = new Bag("bag", "bag", 3);
+        interfaceTest(bag);
+        
+    }
+    
+    public void interfaceTest(Container c) {
+        System.out.println("A bag is a container");
+        System.out.println("c.toString(): " + c.toString());
+    }
 }  // end World class
 

@@ -2,8 +2,11 @@ package adventure.items;
 
 
 public interface Panel {
-    public Object getTarget();
+    public Usable getTarget();
     
-    public void setTarget(Object t);
+    public void setTarget(Usable u);
+    
+    public boolean use();
+    public void examine();
     
 }

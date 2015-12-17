@@ -86,19 +86,20 @@ public class Player {
         } else if (turn.isUse()) {
             actionUse(turn);
 
-        } else if (turn.isPut()) {
-            actionPut(turn);
-
         } else {
             System.out.println("Huh?");
         }
     }
 
+    /* else /*if (turn.isPut()) {
+            actionPut(turn);
+
+        } */
     public void actoinPut(Command turn) {
         String itemName = turn.getDropReference();
         String bagName = turn.getDropReference();
         Item putItem = getItem(itemName);
-        Item bag = getBag(bagName);
+        //Item bag = getBag(bagName);
     }
 
     public void actionTravel(Command turn) {

@@ -174,7 +174,7 @@ public class Room {
 
     // this prints a nice comma separated list of items.  
     protected void printItems() {
-        if (items.size() == 0) {
+        if (items.isEmpty()) {
             return;
         }
         int i;
