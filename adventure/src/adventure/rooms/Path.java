@@ -66,4 +66,8 @@ public class Path {
         blockDescription = desc;
     }
     
+    // subclass hatch overrides this
+    public boolean getOpen() {
+        return true;
+    }
 }  // end class Path

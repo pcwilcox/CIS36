@@ -27,6 +27,7 @@ public class Hatch extends Path {
         open = o;
     }
     
+    @Override
     public boolean getOpen() {
         return open;
     }

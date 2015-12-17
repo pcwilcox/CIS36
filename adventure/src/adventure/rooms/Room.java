@@ -41,12 +41,12 @@ public class Room {
         if (target.getPressure() == true && this.getPressure() == true) {
             sealed = false;
         }
-        
+
         Hatch hatch = new Hatch(this, target, dir, sealed);
-        
+
         exits.add(hatch);
     }
-    
+
     // Adds a hatch instead of an exit
     // This overloaded version allows sealed to be set manually
     public void addHatch(Room target, String dir, boolean sealed) {
@@ -58,7 +58,7 @@ public class Room {
     public boolean getPressure() {
         return pressure;
     }
-    
+
     public void printDescription() {
         System.out.println(description);
         printItems();
@@ -111,7 +111,7 @@ public class Room {
         }
         return null;
     }
-    
+
     // Overloaded method returns the connecting hatchway
     public Path getExit(Room target) {
         for (Path p : exits) {
@@ -193,9 +193,42 @@ public class Room {
         System.out.println(" here.");
     }
 
-    public void setPressure(boolean p) {
-        pressure = p;
+    // Recursion! Sets the pressure in the current room, then 
+    public boolean setPressure(boolean p) {
+        if (this.isSpace() == false) {
+            pressure = p;
+
+            for (Path h : exits) {
+                if (h.getOpen() == true) {
+                    // connecting path is open
+                
+                    if (h.getTarget().isSpace() != true) {
+                        // and the target room isn't space
+                        
+                        // set the pressure in the target room = p and return the value
+                        return h.getTarget().setPressure(p);
+                    } else {
+                        // There is an open pathway to space, so you can't pressurize
+                        return false;
+                    }
+                } else {
+                    // Closed hatch returns true
+                    return true;
+                }
+            }
+            
+            // If we somehow make a room with no exits, return true
+            return true;
+        } else {
+            // If you're in space, pressure is always false
+            return false;
+        }
+
     }
 
+    // Subclasses override this
+    public boolean isSpace() {
+        return false;
+    }
 
 } // end Room

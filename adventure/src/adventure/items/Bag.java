@@ -2,11 +2,10 @@ package adventure.items;
 
 import java.util.ArrayList;
 
-// A bag is a container for items that can be worn or carried, like a backpack
-public class Bag extends Takeable implements Wearable {
+// A bag is a container that is takeable and wearable (a backpack, for example)
+public class Bag extends Takeable implements Wearable, Container {
 
     // A bag has its own inventory
-
     private ArrayList<Item> items;
 
     // Maximum number of items it can hold
@@ -18,6 +17,31 @@ public class Bag extends Takeable implements Wearable {
         capacity = cap;
     }
 
+    @Override
+    public void printItems() {
+        if (items.isEmpty()) {
+            System.out.println("The " + super.getName() + " is empty.");
+        } else {
+            System.out.println("The " + super.getName() + " contains: ");
+            for (Item i : items) {
+                System.out.println(i.getName());
+            }
+        }
+    }
+    
+    // Need to examine Command to figure out how this works
+    @Override
+    public Item getItem(String name) {
+        return null;
+    }
+    
+    // This is really gonna be addItem() but I'm not sure how to work with command yet
+    @Override
+    public boolean putItem(Item i) {
+        return false;
+    }
+    
+    
     @Override
     public boolean wear() {
         // something

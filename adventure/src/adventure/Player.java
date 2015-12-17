@@ -7,7 +7,6 @@ import adventure.items.Wearable;
 import adventure.rooms.Path;
 import java.util.ArrayList;
 
-
 public class Player {
 
     private World myWorld;
@@ -15,13 +14,13 @@ public class Player {
     private String myName = "";
     private ArrayList<Item> myItems;
     private ArrayList<Wearable> worn;
-    
+
     public Player(World world) {
         myWorld = world;
         myItems = new ArrayList<Item>();
         worn = new ArrayList<Wearable>();
     }
-    
+
     public Player(String name, World world) {
         myName = name;
         myWorld = world;
@@ -32,17 +31,15 @@ public class Player {
     public void setCurrentRoom(Room room) {
         currentRoom = room;
     }
-    
+
     public Room getCurrentRoom() {
-        return( currentRoom );
+        return (currentRoom);
     }
-    
-    
+
     ////// Item 
-    
     // returns the item with the name s, or null if there is none    
     public Item getItem(String name) {
-        for (Item item: myItems) {
+        for (Item item : myItems) {
             if (item.getName().equalsIgnoreCase(name)) {
                 return item;
             }
@@ -50,11 +47,13 @@ public class Player {
         return null;
     }
     
+    // Returns the container with the given name
+
     // adds an Item object to the Player
     public void addItem(Item itemToAdd) {
         myItems.add(itemToAdd);
     }
-    
+
     public void removeItem(Item itemToRemove) {
         int i;
         for (i = 0; i < myItems.size(); i++) {
@@ -64,38 +63,44 @@ public class Player {
             }
         }
     }
-    
-    
+
     //////
     //////   Handle Commands
     //////
-    
     public void dispatch(Command turn) {
         if (turn.isLookRoom()) {
             actionLookRoom();
-            
+
         } else if (turn.isTravel(currentRoom)) {
             actionTravel(turn);
 
         } else if (turn.isTake()) {
             actionTake(turn);
-            
+
         } else if (turn.isDrop()) {
             actionDrop(turn);
 
         } else if (turn.isInventory()) {
             actionInventory();
-            
+
         } else if (turn.isUse()) {
             actionUse(turn);
-            
+
+        } else if (turn.isPut()) {
+            actionPut(turn);
+
         } else {
             System.out.println("Huh?");
         }
     }
 
+    public void actoinPut(Command turn) {
+        String itemName = turn.getDropReference();
+        String bagName = turn.getDropReference();
+        Item putItem = getItem(itemName);
+        Item bag = getBag(bagName);
+    }
 
-    
     public void actionTravel(Command turn) {
         String newDir = turn.getDirectionReference();
         Room newRoom = currentRoom.tryToExit(newDir);
@@ -111,15 +116,13 @@ public class Player {
         }
     }
 
-
     public void actionLookRoom() {
         currentRoom.printDescription();
     }
-    
-    
+
     public void actionTake(Command turn) {
         String itemName = turn.getDropReference();
-        Item item = currentRoom.getItem(itemName);   
+        Item item = currentRoom.getItem(itemName);
         if (item == null) {
             // item doesn't exist (misspelled, perhaps).
             System.out.println("There is no item " + itemName + "to take");
@@ -129,11 +132,10 @@ public class Player {
         }
     }
 
-    
     public void actionDrop(Command turn) {
         String itemName = turn.getDropReference();
         Item itemToDrop = getItem(itemName);
-        if (itemToDrop == null ) {          
+        if (itemToDrop == null) {
             System.out.println("You don't have a " + itemName + " to drop");
         } else if (itemToDrop.drop()) { //an item was specified
             removeItem(itemToDrop);
@@ -141,8 +143,6 @@ public class Player {
         }
     }
 
-    
-        
     public void actionInventory() {
         printInv();
     }
@@ -150,7 +150,7 @@ public class Player {
     private void printInv() {
         if (myItems.size() > 0) {
             System.out.println("You have");
-            for (Item item: myItems){
+            for (Item item : myItems) {
                 System.out.print(" -- ");
                 System.out.println(item.getName());
             }
@@ -159,8 +159,7 @@ public class Player {
         }
 
     }
-    
-    
+
     public void actionUse(Command turn) {
         Item item = getItem(turn.getUseReference());
         if (item == null) {
@@ -174,12 +173,5 @@ public class Player {
             removeItem(item);
         }
     }
-
-
-
-    
-
-
-
 
 } // end player

@@ -84,6 +84,6 @@ public class Lift extends Room {
                 }
             }
         }
-        
+        return null;
     }
 }

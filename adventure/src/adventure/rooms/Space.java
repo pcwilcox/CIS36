@@ -13,4 +13,9 @@ public class Space extends Room {
     public boolean getPressure() {
         return false;
     }
+    
+    @Override
+    public boolean isSpace() {
+        return true;
+    }
 }
