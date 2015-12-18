@@ -2,8 +2,7 @@ package adventure;
 
 import adventure.rooms.*;
 import adventure.command.Command;
-import adventure.items.Bag;
-import adventure.items.Container;
+import adventure.items.Panel;
 import java.util.*;
 
 // The world contains the rooms, the player, and where the player is
@@ -267,7 +266,7 @@ public class World {
         extUpperAft.addExit(extUpperStarboard, "east");
         extUpperAft.addExit(extUpperPort, "west");
         extUpperAft.addExit(extLowerAft, "down");
-        extUpperAft.addExit(airlock, "in", true);
+        extUpperAft.addHatch(airlock, "in", true);
         
         extUpperPort.addExit(extTop, "up");
         extUpperPort.addExit(extUpperForward, "north");
@@ -315,7 +314,14 @@ public class World {
         extBottom.addExit(extLowerStarboard, "east");
         extBottom.addExit(extLowerAft, "south");
         
-        
+        // Add panels for hatches
+        for (Room r : rooms) {
+            for (Path p : r.getPaths()) {
+                if (p instanceof Hatch) {
+                    r.addItem(new Panel(r.getName() + "." + p.getTarget() + ".Panel", "a hatch control panel", (Hatch)p));
+                }
+            }
+        }
         
         // set current position
         setCurrentRoom(rooms.get(0));

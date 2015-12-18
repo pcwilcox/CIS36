@@ -65,6 +65,10 @@ public class Room {
         printExits();
     }
 
+    public String getName() {
+        return name;
+    }
+    
     ////// Movement
     //////
     // method that gets called when you first enter a room; returns a boolean
@@ -146,6 +150,10 @@ public class Room {
             System.out.println();
         }
     }
+    
+    public ArrayList<Path> getPaths() {
+        return exits;
+    }
 
     //////  Items
     //////
@@ -201,10 +209,10 @@ public class Room {
             for (Path h : exits) {
                 if (h.getOpen() == true) {
                     // connecting path is open
-                
+
                     if (h.getTarget().isSpace() != true) {
                         // and the target room isn't space
-                        
+
                         // set the pressure in the target room = p and return the value
                         return h.getTarget().setPressure(p);
                     } else {
@@ -216,7 +224,7 @@ public class Room {
                     return true;
                 }
             }
-            
+
             // If we somehow make a room with no exits, return true
             return true;
         } else {
