@@ -6,6 +6,7 @@ import adventure.rooms.Room;
 public abstract class Item{
 
     private String name;
+    private String shortName;
     private String description;
     private boolean canTake;
     
@@ -27,6 +28,14 @@ public abstract class Item{
     
     public String getName() {
         return name;
+    }
+    
+    public String getShort() {
+        return shortName;
+    }
+    
+    public void setShort(String s) {
+        shortName = s;
     }
     
     // returns boolean representing whether this item can be taken

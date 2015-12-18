@@ -179,6 +179,10 @@ public class Room {
             }
         }
     }
+    
+    public ArrayList<Item> getItems() {
+        return items;
+    }
 
     // this prints a nice comma separated list of items.  
     protected void printItems() {

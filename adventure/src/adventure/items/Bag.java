@@ -16,8 +16,10 @@ public class Bag extends Takeable implements Wearable, Container {
         super(name, description);
         items = new ArrayList<>();
         capacity = cap;
+        this.setShort("bag");
     }
     
+    @Override
     public boolean isFull() {
         if (items.size() == capacity) {
             return true;

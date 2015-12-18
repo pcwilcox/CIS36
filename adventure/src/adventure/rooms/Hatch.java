@@ -24,7 +24,7 @@ public class Hatch extends Path implements Usable {
         super.setBlockDescription("The hatch does not open.");
         canUse = true;
     }
-    
+
     @Override
     public void setUse(boolean use) {
         canUse = use;
@@ -41,7 +41,37 @@ public class Hatch extends Path implements Usable {
 
     @Override
     public boolean use() {
+        // If it's not locked
+        if (canUse) {
+            
+            // If it's open
+            if (open) {
+                
+                // Close it
+                open = false;
+                
+                System.out.println("The hatch closes.");
 
+                // Attempt to repressurize
+                if (super.getSource().getPressure() == false) {
+                    super.getSource().setPressure(true);
+                    
+                    // If it's successful
+                    if (super.getSource().getPressure()) {
+                        System.out.println("You hear a hissing as the environment systems repressurize the compartment.");
+                    }
+                }
+                
+                return true;
+            } else {
+                // Open it
+                open = true;
+                
+                // If you open a compartment to space, bad things happen
+                super.getSource().setPressure(super.getTarget().getPressure());
+                return true;
+            }
+        }
         return false;
     }
 

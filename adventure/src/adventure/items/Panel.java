@@ -1,6 +1,7 @@
 package adventure.items;
 
 import adventure.Player;
+import adventure.rooms.Room;
 import java.util.ArrayList;
 
 // A panel is a stationary object that allows the player to interact with 
@@ -9,11 +10,13 @@ public class Panel extends Stationary {
 
     private Usable target;
     private ArrayList<Item> required;
+    
 
     public Panel(String name, String desc, Usable t) {
         super(name, desc);
         target = t;
         required = new ArrayList<>();
+        this.setShort("panel");
     }
 
     public Panel(String name, String desc, Usable t, Item r) {
@@ -39,7 +42,8 @@ public class Panel extends Stationary {
         return required;
     }
 
-    public boolean use(Player p) {
+    @Override
+    public boolean use(Room currentRoom, Player p) {
         int hasRequired = 0;
         
         // For each required item

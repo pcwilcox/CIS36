@@ -3,6 +3,7 @@ package adventure;
 import adventure.items.Item;
 import adventure.rooms.Room;
 import adventure.command.Command;
+import adventure.items.Container;
 import adventure.items.Wearable;
 import adventure.rooms.Path;
 import java.util.ArrayList;
@@ -40,23 +41,28 @@ public class Player {
     // returns the item with the name s, or null if there is none    
     public Item getItem(String name) {
         for (Item item : myItems) {
-            if (item.getName().equalsIgnoreCase(name)) {
+            if (item.getName().equalsIgnoreCase(name) || item.getShort().equalsIgnoreCase(name)) {
+                return item;
+            }
+        }
+        for (Item item : currentRoom.getItems()) {
+            if (item.getName().equalsIgnoreCase(name) || item.getShort().equalsIgnoreCase(name)) {
                 return item;
             }
         }
         return null;
     }
-    
+
     public void addWorn(Wearable w) {
         worn.add(w);
     }
-    
+
     public void removeWorn(Wearable w) {
         if (worn.contains(w)) {
             worn.remove(w);
         }
     }
-    
+
     public Wearable getWorn(String name) {
         for (Wearable w : worn) {
             if (w.getName().equalsIgnoreCase(name)) {
@@ -88,6 +94,8 @@ public class Player {
         if (turn.isLookRoom()) {
             actionLookRoom();
 
+        } else if (turn.isLookItem()) {
+            actionLookItem(turn);
         } else if (turn.isTravel(currentRoom)) {
             actionTravel(turn);
 
@@ -102,21 +110,30 @@ public class Player {
 
         } else if (turn.isUse()) {
             actionUse(turn);
+        } else if (turn.isPut()) {
+            actionPut(turn);
 
         } else {
             System.out.println("Huh?");
         }
     }
 
-    /* else /*if (turn.isPut()) {
-            actionPut(turn);
-
-        } */
     public void actionPut(Command turn) {
-        String itemName = turn.getDropReference();
-        String bagName = turn.getDropReference();
-        Item putItem = getItem(itemName);
-        //Item bag = getBag(bagName);
+        String itemName = turn.getFirstReference();
+        String containerName = turn.getSecondReference();
+        Item item = getItem(itemName);
+        Item c = getItem(containerName);
+        if (item != null && c != null) {
+            if (c instanceof Container) {
+                Container container = (Container) c;
+                container.putItem(item, this);
+            } else {
+                System.out.println("The " + c.getName() + " is not a container.");
+            }
+
+        } else {
+            System.out.println("Huh?");
+        }
     }
 
     public void actionTravel(Command turn) {
@@ -136,6 +153,15 @@ public class Player {
 
     public void actionLookRoom() {
         currentRoom.printDescription();
+    }
+
+    public void actionLookItem(Command turn) {
+        Item item = getItem(turn.getFirstReference());
+        if (item != null) {
+            System.out.println("You see " + item.getDescription());
+        } else {
+            System.out.println("Look at what?");
+        }
     }
 
     public void actionTake(Command turn) {
