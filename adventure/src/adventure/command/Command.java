@@ -10,6 +10,9 @@ public class Command extends InputGather {
     // these two are just conveniences.  Could use inputWords from parent class..
     private String firstWord = null;
     private String secondWord = null;
+    private String thirdWord = null;
+    private String fourthWord = null;
+    private String fifthWord = null;
 
     // The constructor
     public Command() {
@@ -26,11 +29,21 @@ public class Command extends InputGather {
             gatherInput();
             processInput();    // recursion!
         }
+        
         if (inputWords.size() >= 1) {
             firstWord = inputWords.get(0);
         } 
         if (inputWords.size() >=2) {
             secondWord = inputWords.get(1);
+        }
+        if (inputWords.size() >=3) {
+            thirdWord = inputWords.get(2);
+        }
+        if (inputWords.size() >=4) {
+            fourthWord = inputWords.get(3);
+        }
+        if (inputWords.size() >= 5) {
+            fifthWord = inputWords.get(4);
         }
     }
 
@@ -59,10 +72,14 @@ public class Command extends InputGather {
     public boolean isQuit() {
         return firstWordIn( QUIT_words ) ;
     }
+    
+    
 
     private static String[] QUIT_words = {"quit", "exit", "die", "uncle", "q"};
     private static String[] HELP_words = {"help", "?"};
     
+    
+    private static String[] NUMBER_words = {"first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"};
     
     /// player
        
@@ -76,7 +93,7 @@ public class Command extends InputGather {
     }
     
     private static String[] INVENTORY_words = {"inventory", "inv", "i"};
-    private static String[] LOOK_words = {"look", "gaze", "l"};
+    private static String[] LOOK_words = {"look", "gaze", "l", "examine"};
     
    
     /// travel
@@ -100,17 +117,32 @@ public class Command extends InputGather {
     private static String[] TRAVEL_words = {"go", "travel", "venture", "walk", "amble", "enter"};
     
 
-        
-    /// item
+    // Numbering (second hatch)
+    public boolean isNumber() {
+        if (secondWordIn( NUMBER_words ) == true) {
+            return true;
+        } else if (thirdWordIn( NUMBER_words ) == true) {
+            return true;
+        } else if (fourthWordIn( NUMBER_words ) == true) {
+            return true;
+        } else if (fifthWordIn( NUMBER_words ) == true) {
+            return true;
+        }
+        return false;
+    }
     
+    
+    
+    /// item
+       
     public boolean isTake() {
         return  firstWordIn( TAKE_words );
     }
     
     // handles commands like "pick up key"
     public String getTakeReference() {
-        if (firstWord == "pick") {
-            if (secondWord == "up") {
+        if (firstWord.equals("pick")) {
+            if (secondWord.equals("up")) {
                 secondWord = inputWords.get(2);
             }
         }
@@ -153,6 +185,27 @@ public class Command extends InputGather {
     private boolean secondWordIn(String[] words) {
         for (String word : words) {
             if (secondWord.equalsIgnoreCase(word)) return true;
+        }
+        return false;
+    }
+    
+    private boolean thirdWordIn(String[] words) {
+        for (String word : words) {
+            if (thirdWord.equalsIgnoreCase(word)) return true;
+        }
+        return false;
+    }
+    
+    private boolean fourthWordIn(String[] words) {
+        for (String word : words) {
+            if (fourthWord.equalsIgnoreCase(word)) return true;
+        }
+        return false;
+    }
+    
+    private boolean fifthWordIn(String[] words) {
+        for (String word : words) {
+            if (fifthWord.equalsIgnoreCase(word)) return true;
         }
         return false;
     }

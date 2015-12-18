@@ -13,13 +13,13 @@ public class Panel extends Stationary {
     public Panel(String name, String desc, Usable t) {
         super(name, desc);
         target = t;
-        required = new ArrayList<Item>();
+        required = new ArrayList<>();
     }
 
     public Panel(String name, String desc, Usable t, Item r) {
         super(name, desc);
         target = t;
-        required = new ArrayList<Item>();
+        required = new ArrayList<>();
         required.add(r);
     }
 

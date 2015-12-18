@@ -19,8 +19,8 @@ public class Room {
     public Room(String name, String desc) {
         this.name = name;
         this.description = desc;
-        exits = new ArrayList<Path>();
-        items = new ArrayList<Item>();
+        exits = new ArrayList<>();
+        items = new ArrayList<>();
     }
 
     // setters and getters
@@ -127,7 +127,7 @@ public class Room {
     }
 
     public void printExits() {
-        if (exits.size() == 0) {
+        if (exits.isEmpty()) {
             System.out.println("There are no exits, and therefore no way out of here!");
         } else {
             int i = 0;

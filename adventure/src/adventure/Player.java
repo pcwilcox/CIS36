@@ -17,15 +17,15 @@ public class Player {
 
     public Player(World world) {
         myWorld = world;
-        myItems = new ArrayList<Item>();
-        worn = new ArrayList<Wearable>();
+        myItems = new ArrayList<>();
+        worn = new ArrayList<>();
     }
 
     public Player(String name, World world) {
         myName = name;
         myWorld = world;
-        myItems = new ArrayList<Item>();
-        worn = new ArrayList<Wearable>();
+        myItems = new ArrayList<>();
+        worn = new ArrayList<>();
     }
 
     public void setCurrentRoom(Room room) {

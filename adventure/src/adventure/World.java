@@ -22,7 +22,7 @@ public class World {
     ////// Setup (populate the world)
     //////
     public World() {
-        rooms = new ArrayList<Room>();
+        rooms = new ArrayList<>();
         thePlayer = new Player(this);
 
         // create the items
@@ -317,11 +317,13 @@ public class World {
         // Add panels for hatches
         for (Room r : rooms) {
             for (Path p : r.getPaths()) {
-                if (p instanceof Hatch) {
-                    r.addItem(new Panel(r.getName() + "." + p.getTarget() + ".Panel", "a hatch control panel", (Hatch)p));
+                // The panel in the lift is different
+                if (r instanceof Lift == false && p instanceof Hatch) {
+                    r.addItem(new Panel("hatch control panel", "a panel controlling the hatch leading " + p.getDirection() + ".", (Hatch)p));
                 }
             }
         }
+        
         
         // set current position
         setCurrentRoom(rooms.get(0));
@@ -360,7 +362,7 @@ public class World {
     }
 
     private void printWelcome() {
-        System.out.println("Welcome to Damage Control. \n"
+        System.out.println("Welcome to Damage Control! \n"
                 + "You are the engineer aboard the  the starship Aasimov. The \n"
                 + "ship was carrying passengers in cryo-sleep on a journey to Europa, \n"
                 + "one of Jupiter's moons. You would not be woken up during a normal \n"

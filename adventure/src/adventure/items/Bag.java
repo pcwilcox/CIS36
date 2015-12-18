@@ -14,7 +14,7 @@ public class Bag extends Takeable implements Wearable, Container {
 
     public Bag(String name, String description, int cap) {
         super(name, description);
-        items = new ArrayList<Item>();
+        items = new ArrayList<>();
         capacity = cap;
     }
     
