@@ -355,6 +355,9 @@ public class World {
 
             Command turn = new Command();    // read user input
             dispatch(turn);
+            if (thePlayer.getCurrentRoom().getPressure() == false) {
+                System.out.println("You suffer explosive decompression. Game over.");
+            }
         }
 
         //stopped

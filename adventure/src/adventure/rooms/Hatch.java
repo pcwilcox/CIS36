@@ -67,8 +67,15 @@ public class Hatch extends Path implements Usable {
                 // Open it
                 open = true;
                 
+                System.out.println("The hatch opens.");
+                boolean wasPressurized = super.getSource().getPressure();
+                
                 // If you open a compartment to space, bad things happen
                 super.getSource().setPressure(super.getTarget().getPressure());
+                
+                if (wasPressurized == true && super.getSource().getPressure() == false) {
+                    System.out.println("You are shocked to hear the loud hiss of air escaping through the open hatch. The room rapidly depressurizes.");
+                }
                 return true;
             }
         }
