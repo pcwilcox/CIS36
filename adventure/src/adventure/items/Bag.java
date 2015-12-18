@@ -44,26 +44,53 @@ public class Bag extends Takeable implements Wearable, Container {
     
     // Need to examine Command to figure out how this works
     @Override
-    public Item getItem(String name) {
-        return null;
+    public boolean getItem(String name, Player p) {
+        for (Item i : items) {
+            if (i.isReference(name)) {
+                p.addItem(i);
+                items.remove(i);
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     // This is really gonna be addItem() but I'm not sure how to work with command yet
     @Override
-    public boolean putItem(Item i) {
+    public boolean putItem(Item i, Player p) {
+        if (items.size() < capacity) {
+            items.add(i);
+            p.removeItem(i);
+            System.out.println("You put the " + i.getName() + " in the " + this.getName() + ".");
+            return true;
+        }
+        System.out.println("There is not enough room in the " + this.getName() + ".");
         return false;
     }
     
     
     @Override
-    public boolean wear() {
-        // something
+    public boolean wear(Player p) {
+        if (p.getItem(this.getName()) != null) {
+            p.addWorn(this);
+            p.removeItem(this);
+            System.out.println("You wear the " + this.getName() + ".");
+            return true;
+        }
+        
+        System.out.println("You need to pick up the " + this.getName() + " first!");
         return false;
     }
 
     @Override
-    public boolean remove() {
-        // something
+    public boolean remove(Player p) {
+        if (p.getWorn(this.getName()) != null) {
+            p.addItem(this);
+            p.removeWorn(this);
+            System.out.println("You remove the " + this.getName() + ".");
+        }
+        System.out.println("You can't remove something you aren't wearing!");
         return false;
     }
 

@@ -107,6 +107,10 @@ public class World {
         Room cryo4 = new Room("CryoSleep Three - Lower Deck - Port",
                 "Lower port cryo chamber");
         addRoom(cryo4);
+        
+        Room atrium = new Room("Atrium - Upper Deck",
+                "The observation dome at the top of the ship.");
+        addRoom(atrium);
 
         Lift lift = new Lift("Main Lift",
                 "main lift",
@@ -161,147 +165,161 @@ public class World {
                 "Outside the main engines");
         addRoom(extBottom);
         
+        Room workshop = new Room("Workshop",
+        "workshop");
+        addRoom(workshop);
+        
+        Room storage = new Room("Storage",
+                "storage");
+        addRoom(storage);
+        
         lift.addDeck(corridorLowerForward);
         lift.addDeck(corridorUpperForward);
 
         //connect the rooms
-        bridge.addHatch(corridorUpperForward, "out");
-        bridge.addExit(navConsole, "Navigation Console");
-        bridge.addExit(captainChair, "Captain's Chair");
-        bridge.addExit(bridgeComputer, "Main Computer");
+        bridge.addHatch(corridorUpperForward, "south");
+        bridge.addExit(navConsole, "east");
+        bridge.addExit(captainChair, "north");
+        bridge.addExit(bridgeComputer, "west");
 
-        navConsole.addExit(bridge, "Bridge");
+        navConsole.addExit(bridge, "west");
 
-        captainChair.addExit(bridge, "Bridge");
+        captainChair.addExit(bridge, "south");
 
-        bridgeComputer.addExit(bridge, "Bridge");
+        bridgeComputer.addExit(bridge, "east");
 
-        corridorUpperForward.addHatch(bridge, "Bridge");
-        corridorUpperForward.addExit(corridorUpperPort, "port");
-        corridorUpperForward.addExit(corridorUpperStarboard, "starboard");
-        corridorUpperForward.addHatch(lift, "Lift");
-        corridorUpperForward.setPressure(false);
+        corridorUpperForward.addHatch(bridge, "north");
+        corridorUpperForward.addExit(corridorUpperPort, "west");
+        corridorUpperForward.addExit(corridorUpperStarboard, "east");
+        corridorUpperForward.addHatch(lift, "south");
+        
+        corridorUpperPort.addExit(corridorUpperForward, "north");
+        corridorUpperPort.addExit(corridorUpperAft, "south");
+        corridorUpperPort.addHatch(cryo2, "east");
 
-        corridorUpperPort.addExit(corridorUpperForward, "forward");
-        corridorUpperPort.addExit(corridorUpperAft, "aft");
-        corridorUpperPort.addHatch(cryo2, "Cryo 2");
+        corridorUpperStarboard.addExit(corridorUpperForward, "north");
+        corridorUpperStarboard.addExit(corridorUpperAft, "south");
+        corridorUpperStarboard.addHatch(cryo1, "east");
 
-        corridorUpperStarboard.addExit(corridorUpperForward, "forward");
-        corridorUpperStarboard.addExit(corridorUpperAft, "aft");
-        corridorUpperStarboard.addHatch(cryo1, "Cryo 1");
+        corridorUpperAft.addExit(corridorUpperStarboard, "east");
+        corridorUpperAft.addExit(corridorUpperPort, "west");
+        corridorUpperAft.addHatch(atrium, "north");
+        
+        atrium.addHatch(corridorUpperAft, "south");
+        
+        corridorLowerForward.addHatch(cargo, "north");
 
-        corridorUpperAft.addExit(corridorUpperStarboard, "starboard");
-        corridorUpperAft.addExit(corridorUpperPort, "port");
+        corridorLowerForward.addExit(corridorLowerPort, "west");
+        corridorLowerForward.addExit(corridorLowerStarboard, "east");
 
-        corridorLowerForward.addHatch(cargo, "cargo hold");
+        corridorLowerPort.addExit(corridorLowerForward, "north");
+        corridorLowerPort.addExit(corridorLowerAft, "south");
+        corridorLowerPort.addHatch(cryo4, "west");
+        corridorLowerPort.addHatch(storage, "east");
 
-        corridorLowerForward.addExit(corridorLowerPort, "port");
-        corridorLowerForward.addExit(corridorLowerStarboard, "starboard");
+        corridorLowerStarboard.addExit(corridorLowerForward, "north");
+        corridorLowerStarboard.addExit(corridorLowerAft, "south");
+        corridorLowerStarboard.addHatch(cryo3, "east");
+        corridorLowerStarboard.addHatch(workshop, "west");
 
-        corridorLowerPort.addExit(corridorLowerForward, "forward");
-        corridorLowerPort.addExit(corridorLowerAft, "aft");
-        corridorLowerPort.addHatch(cryo4, "cryo");
+        corridorLowerAft.addExit(corridorLowerPort, "west");
+        corridorLowerAft.addExit(corridorLowerStarboard, "east");
+        corridorLowerAft.addHatch(engineering, "south");
 
-        corridorLowerStarboard.addExit(corridorLowerForward, "forward");
-        corridorLowerStarboard.addExit(corridorLowerAft, "aft");
-        corridorLowerStarboard.addHatch(cryo3, "cryo 3");
+        engineering.addHatch(corridorLowerAft, "north");
+        engineering.addExit(engine, "west");
+        engineering.addExit(lifeSupport, "east");
 
-        corridorLowerAft.addExit(corridorLowerPort, "port");
-        corridorLowerAft.addExit(corridorLowerStarboard, "starboard");
-        corridorLowerAft.addHatch(engineering, "engineering");
+        workshop.addHatch(corridorLowerStarboard, "east");
+        
+        storage.addHatch(corridorLowerPort, "west");
+        
+        cargo.addHatch(corridorLowerForward, "south");
 
-        engineering.addHatch(corridorLowerAft, "out");
-        engineering.addExit(engine, "engine");
-        engineering.addExit(lifeSupport, "life support");
+        cargo.addExit(cargoLock, "north");
 
-        cargo.addHatch(corridorLowerForward, "out");
+        engine.addExit(engineering, "north");
 
-        cargo.addExit(cargoLock, "airlock");
+        lifeSupport.addExit(engineering, "west");
 
-        engine.addExit(engineering, "out");
+        cryo1.addHatch(corridorUpperStarboard, "south");
 
-        lifeSupport.addExit(engineering, "out");
+        cryo2.addHatch(corridorUpperPort, "east");
 
-        cryo1.addHatch(corridorUpperStarboard, "out");
+        cryo3.addHatch(corridorLowerStarboard, "west");
 
-        cryo2.addHatch(corridorUpperPort, "out");
+        cryo4.addHatch(corridorLowerPort, "east");
 
-        cryo3.addHatch(corridorLowerStarboard, "out");
+        airlock.addHatch(corridorUpperAft, "north");
 
-        cryo4.addHatch(corridorLowerPort, "out");
-
-        airlock.addHatch(corridorUpperAft, "in");
-
-        corridorUpperAft.addHatch(airlock, "out", true);
+        corridorUpperAft.addHatch(airlock, "south", true);
 
         airlock.setPressure(false);
 
-        airlock.addHatch(extUpperAft, "out", true);
+        airlock.addHatch(extUpperAft, "south", true);
 
-        cargoLock.addHatch(extLowerForward, "out", true);
-        cargoLock.addHatch(cargo, "in", true);
+        cargoLock.addHatch(extLowerForward, "south", true);
+        cargoLock.addHatch(cargo, "north", true);
         cargoLock.setPressure(false);
 
         
         extUpperAft.addExit(extTop, "up");
-        extUpperAft.addExit(extUpperStarboard, "starboard");
-        extUpperAft.addExit(extUpperPort, "port");
+        extUpperAft.addExit(extUpperStarboard, "east");
+        extUpperAft.addExit(extUpperPort, "west");
         extUpperAft.addExit(extLowerAft, "down");
+        extUpperAft.addExit(airlock, "in", true);
         
         extUpperPort.addExit(extTop, "up");
-        extUpperPort.addExit(extUpperForward, "forward");
-        extUpperPort.addExit(extUpperAft, "aft");
+        extUpperPort.addExit(extUpperForward, "north");
+        extUpperPort.addExit(extUpperAft, "south");
         extUpperPort.addExit(extLowerPort, "down");
         
         extUpperStarboard.addExit(extTop, "up");
-        extUpperStarboard.addExit(extUpperAft, "aft");
-        extUpperStarboard.addExit(extUpperForward, "forward");
+        extUpperStarboard.addExit(extUpperAft, "south");
+        extUpperStarboard.addExit(extUpperForward, "north");
         extUpperStarboard.addExit(extLowerStarboard, "down");
         
         extUpperForward.addExit(extTop, "up");
-        extUpperForward.addExit(extUpperPort, "port");
-        extUpperForward.addExit(extUpperStarboard, "starboard");
+        extUpperForward.addExit(extUpperPort, "west");
+        extUpperForward.addExit(extUpperStarboard, "east");
         extUpperForward.addExit(extLowerForward, "down");
         
-        extTop.addExit(extUpperForward, "forward");
-        extTop.addExit(extUpperPort, "port");
-        extTop.addExit(extUpperStarboard, "starboard");
-        extTop.addExit(extUpperAft, "aft");
+        extTop.addExit(extUpperForward, "north");
+        extTop.addExit(extUpperPort, "west");
+        extTop.addExit(extUpperStarboard, "east");
+        extTop.addExit(extUpperAft, "south");
         
         extLowerAft.addExit(extUpperAft, "up");
-        extLowerAft.addExit(extLowerPort, "port");
-        extLowerAft.addExit(extLowerStarboard, "starboard");
+        extLowerAft.addExit(extLowerPort, "west");
+        extLowerAft.addExit(extLowerStarboard, "east");
         extLowerAft.addExit(extBottom, "down");
         
         extLowerPort.addExit(extUpperPort, "up");
-        extLowerPort.addExit(extLowerForward, "forward");
-        extLowerPort.addExit(extLowerAft, "aft");
+        extLowerPort.addExit(extLowerForward, "north");
+        extLowerPort.addExit(extLowerAft, "south");
         extLowerPort.addExit(extBottom, "down");
         
         extLowerStarboard.addExit(extUpperStarboard, "up");
-        extLowerStarboard.addExit(extLowerForward, "forward");
-        extLowerStarboard.addExit(extLowerAft, "aft");
+        extLowerStarboard.addExit(extLowerForward, "north");
+        extLowerStarboard.addExit(extLowerAft, "south");
         extLowerStarboard.addExit(extBottom, "down");
         
         extLowerForward.addExit(extUpperForward, "up");
-        extLowerForward.addExit(extLowerPort, "port");
-        extLowerForward.addExit(extLowerStarboard, "starboard");
+        extLowerForward.addExit(extLowerPort, "west");
+        extLowerForward.addExit(extLowerStarboard, "east");
         extLowerForward.addExit(extBottom, "down");
         extLowerForward.addHatch(cargoLock, "in", true);
         
-        extBottom.addExit(extLowerForward, "forward");
-        extBottom.addExit(extLowerPort, "port");
-        extBottom.addExit(extLowerStarboard, "starboard");
-        extBottom.addExit(extLowerAft, "aft");
+        extBottom.addExit(extLowerForward, "north");
+        extBottom.addExit(extLowerPort, "west");
+        extBottom.addExit(extLowerStarboard, "east");
+        extBottom.addExit(extLowerAft, "south");
+        
+        
         
         // set current position
         setCurrentRoom(rooms.get(0));
-        Bag bag = new Bag("bag", "a bag", 3);
-        bridge.addItem(bag);
-        System.out.println(bag);
         
-        interfaceTester();
-
     }
 
     public void addRoom(Room room) {
@@ -386,15 +404,5 @@ public class World {
         gameOver();
     }
 
-    public void interfaceTester() {
-        Bag bag = new Bag("bag", "bag", 3);
-        interfaceTest(bag);
-        
-    }
-    
-    public void interfaceTest(Container c) {
-        System.out.println("A bag is a container");
-        System.out.println("c.toString(): " + c.toString());
-    }
 }  // end World class
 

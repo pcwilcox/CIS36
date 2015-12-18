@@ -47,7 +47,24 @@ public class Player {
         return null;
     }
     
-    // Returns the container with the given name
+    public void addWorn(Wearable w) {
+        worn.add(w);
+    }
+    
+    public void removeWorn(Wearable w) {
+        if (worn.contains(w)) {
+            worn.remove(w);
+        }
+    }
+    
+    public Wearable getWorn(String name) {
+        for (Wearable w : worn) {
+            if (w.getName().equalsIgnoreCase(name)) {
+                return w;
+            }
+        }
+        return null;
+    }
 
     // adds an Item object to the Player
     public void addItem(Item itemToAdd) {
@@ -95,7 +112,7 @@ public class Player {
             actionPut(turn);
 
         } */
-    public void actoinPut(Command turn) {
+    public void actionPut(Command turn) {
         String itemName = turn.getDropReference();
         String bagName = turn.getDropReference();
         Item putItem = getItem(itemName);
